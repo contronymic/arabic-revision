@@ -1,0 +1,114 @@
+{
+  "id": "lesson-01",
+  "title": "Lesson 1",
+  "sets": [
+    { "id": "ahlan", "reply": "ahlan-bika", "forms": [
+      {"id": "ahlan", "ar": "ahlan", "en": "hello", "hint": "(not marḥaba)"} ] },
+    { "id": "naam", "forms": [
+      {"id": "naam", "ar": "naعm", "en": "yes"} ] },
+    { "id": "la", "forms": [
+      {"id": "la", "ar": "lā", "en": "no"} ] },
+    { "id": "tafaddal", "forms": [
+      {"id": "tafaddal", "ar": "tafaḍḍal", "en": "please, offering something (to a man)"},
+      {"id": "tafaddali", "ar": "tafaḍḍali", "en": "please, offering something (to a woman)"},
+      {"id": "tafaddalu", "ar": "tafaḍḍalu", "en": "please, offering something (to a group)"} ] },
+    { "id": "shukran", "reply": "afwan", "forms": [
+      {"id": "shukran", "ar": "šukran", "en": "thank you"} ] },
+    { "id": "afwan", "forms": [
+      {"id": "afwan", "ar": "عfwan", "en": "you are welcome"} ] },
+    { "id": "tamam", "forms": [
+      {"id": "tamam", "ar": "tamam", "en": "alright / OK"} ] },
+    { "id": "asef", "forms": [
+      {"id": "asef", "ar": "āsef", "en": "sorry (said by a man)"},
+      {"id": "asefe", "ar": "āsefe", "en": "sorry (said by a woman)"},
+      {"id": "asefin", "ar": "āsefīn", "en": "sorry (said by a group)"} ] },
+    { "id": "basita", "forms": [
+      {"id": "basita", "ar": "basīṭa", "en": "take it easy"} ] },
+    { "id": "maalesh", "forms": [
+      {"id": "maalesh", "ar": "maعlēš", "en": "never mind"} ] },
+    { "id": "ahlan-bika", "forms": [
+      {"id": "ahlan-bika", "ar": "ahlan bika", "en": "hi to you (to a man)"},
+      {"id": "ahlan-biki", "ar": "ahlan biki", "en": "hi to you (to a woman)"} ] },
+    { "id": "marhaba", "reply": "marhabten", "forms": [
+      {"id": "marhaba", "ar": "marḥaba", "en": "hello", "hint": "(not ahlan)"} ] },
+    { "id": "marhabten", "forms": [
+      {"id": "marhabten", "ar": "marḥabtēn", "en": "reply to marḥaba (literally: two hellos)"} ] },
+    { "id": "sabah-il-kher", "reply": "sabah-i-nnur", "forms": [
+      {"id": "sabah-il-kher", "ar": "şabāḥ il-kḥēr", "en": "good morning"} ] },
+    { "id": "sabah-i-nnur", "forms": [
+      {"id": "sabah-i-nnur", "ar": "şabāḥ i-nnūr", "en": "reply to good morning (literally: morning of light)"} ] },
+    { "id": "masa-il-kher", "reply": "masa-i-nnur", "forms": [
+      {"id": "masa-il-kher", "ar": "masa il-kḥēr", "en": "good evening"} ] },
+    { "id": "masa-i-nnur", "forms": [
+      {"id": "masa-i-nnur", "ar": "masa i-nnūr", "en": "reply to good evening (literally: evening of light)"} ] },
+    { "id": "tisbah", "reply": "min-ahlu", "note": "Literally: may you wake up well.", "forms": [
+      {"id": "tisbah", "ar": "tisbaḥ عalā kḥēr", "en": "good night (to a man)"},
+      {"id": "tisbahi", "ar": "tisbaḥi عalā kḥēr", "en": "good night (to a woman)"},
+      {"id": "tisbahu", "ar": "tisbaḥu عalā kḥēr", "en": "good night (to a group)"} ] },
+    { "id": "min-ahlu", "note": "Literally: and you are one of its people.", "forms": [
+      {"id": "wa-inta-min-ahlu", "ar": "wa inta min ahlu", "en": "and you too, reply to good night (to a man)"},
+      {"id": "wa-inti-min-ahlu", "ar": "wa inti min ahlu", "en": "and you too, reply to good night (to a woman)"},
+      {"id": "wa-intu-min-ahlu", "ar": "wa intu min ahlu", "en": "and you too, reply to good night (to a group)"} ] },
+    { "id": "assalam", "reply": "wa-alaykum", "forms": [
+      {"id": "assalam-alaykum", "ar": "assalām عalaykum", "en": "peace be upon you"} ] },
+    { "id": "wa-alaykum", "forms": [
+      {"id": "wa-alaykum-issalam", "ar": "wa عalaykum issalām", "en": "reply to peace be upon you (and upon you, peace)"} ] },
+    { "id": "maa-issalame", "forms": [
+      {"id": "maa-issalame", "ar": "maع issalāme", "en": "goodbye"} ] },
+    { "id": "isim", "forms": [
+      {"id": "isim", "ar": "isim", "en": "name"} ] },
+    { "id": "ismi", "forms": [
+      {"id": "ismi", "ar": "ismi …", "en": "my name is …"} ] },
+    { "id": "ismak", "forms": [
+      {"id": "ismak", "ar": "ismak", "en": "your name (to a man)"},
+      {"id": "ismek", "ar": "ismek", "en": "your name (to a woman)"} ] },
+    { "id": "shu", "forms": [
+      {"id": "shu", "ar": "šū", "en": "what"} ] },
+    { "id": "shu-ismak", "reply": "ismi", "forms": [
+      {"id": "shu-ismak", "ar": "šū ismak?", "en": "what is your name? (to a man)"},
+      {"id": "shu-ismek", "ar": "šū ismek?", "en": "what is your name? (to a woman)"} ] },
+    { "id": "ana-wa-inta", "forms": [
+      {"id": "ana-wa-inta", "ar": "ana … wa inta?", "en": "I am … and you? (to a man)"} ] },
+    { "id": "tasharrafna", "reply": "w-ilna", "forms": [
+      {"id": "tasharrafna", "ar": "tašarrafna", "en": "pleased to meet you"} ] },
+    { "id": "w-ilna", "forms": [
+      {"id": "w-ilna-ssharaf", "ar": "w-ilna ššaraf", "en": "we are honoured as well"} ] },
+    { "id": "kif-halak", "reply": "ilhamdilla", "forms": [
+      {"id": "kif-halak", "ar": "kīf ḥālak?", "en": "how are you? (to a man)", "hint": "(not kīfak)"},
+      {"id": "kif-halek", "ar": "kīf ḥālek?", "en": "how are you? (to a woman)", "hint": "(not kīfek)"},
+      {"id": "kif-halkum", "ar": "kīf ḥālkum?", "en": "how are you? (to a group)", "hint": "(not kīfkum)"} ] },
+    { "id": "ilhamdilla", "forms": [
+      {"id": "ilhamdilla", "ar": "ilḥamdilla", "en": "praise be to God"} ] },
+    { "id": "kifak", "reply": "ilhamdilla", "forms": [
+      {"id": "kifak", "ar": "kīfak?", "en": "how are you? (to a man)", "hint": "(not kīf ḥālak)"},
+      {"id": "kifek", "ar": "kīfek?", "en": "how are you? (to a woman)", "hint": "(not kīf ḥālek)"},
+      {"id": "kifkum", "ar": "kīfkum?", "en": "how are you? (to a group)", "hint": "(not kīf ḥālkum)"} ] },
+    { "id": "mabsut", "forms": [
+      {"id": "mabsut", "ar": "mabsūṭ", "en": "fine (m)"},
+      {"id": "mabsuta", "ar": "mabsūṭa", "en": "fine (f)"},
+      {"id": "mabsutin", "ar": "mabsūṭīn", "en": "fine (pl)"} ] },
+    { "id": "mashghul", "forms": [
+      {"id": "mashghul", "ar": "mašġūl", "en": "busy (m)"},
+      {"id": "mashghule", "ar": "mašġūle", "en": "busy (f)"},
+      {"id": "mashghulin", "ar": "mašġūlīn", "en": "busy (pl)"} ] },
+    { "id": "taban", "forms": [
+      {"id": "taban", "ar": "taعbān", "en": "tired (m)"},
+      {"id": "tabane", "ar": "taعbāne", "en": "tired (f)"},
+      {"id": "tabanin", "ar": "taعbānīn", "en": "tired (pl)"} ] },
+    { "id": "mish", "note": "lā, ana miš mašġūl. — No, I am not busy.", "forms": [
+      {"id": "mish", "ar": "miš", "en": "not"} ] },
+    { "id": "pronouns", "forms": [
+      {"id": "ana", "ar": "ana", "en": "I"},
+      {"id": "inta", "ar": "inta", "en": "you (m)"},
+      {"id": "inti", "ar": "inti", "en": "you (f)"},
+      {"id": "huwwe", "ar": "huwwe", "en": "he"},
+      {"id": "hiyye", "ar": "hiyye", "en": "she"},
+      {"id": "nihna", "ar": "niḥna", "en": "we"},
+      {"id": "intu", "ar": "intu", "en": "you (pl)"},
+      {"id": "humme", "ar": "humme", "en": "they"} ] },
+    { "id": "shukran-ilak", "forms": [
+      {"id": "shukran-ilak", "ar": "šukran ilak", "en": "thanks to you (to a man)"},
+      {"id": "shukran-ilek", "ar": "šukran ilek", "en": "thanks to you (to a woman)"},
+      {"id": "shukran-ilkum", "ar": "šukran ilkum", "en": "thanks to you (to a group)"} ] }
+  ]
+}
