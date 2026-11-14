@@ -23,3 +23,20 @@ export function fakeFetch(files) {
     };
   };
 }
+
+// A stand-in for localStorage, kept in memory.
+export function memoryStorage() {
+  const map = new Map();
+  return {
+    getItem: (key) => (map.has(key) ? map.get(key) : null),
+    setItem: (key, value) => { map.set(key, String(value)); },
+    removeItem: (key) => { map.delete(key); },
+    keys: () => [...map.keys()],
+  };
+}
+
+// Storage that fails on every call, like Safari's when it is blocked.
+export function throwingStorage() {
+  const fail = () => { throw new Error('storage unavailable'); };
+  return { getItem: fail, setItem: fail, removeItem: fail };
+}
