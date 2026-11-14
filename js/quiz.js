@@ -43,7 +43,13 @@ export function makeQuestion(type, phrase, pool, sets, rng = Math.random) {
     const replyForms = pool.filter((p) => p.setId === replySet.id);
     if (replyForms.length === 0) return null;
     const answerText = pickOne(replyForms, rng).ar;
-    const usable = pool.filter((p) => p.setId !== replySet.id && p.setId !== phrase.setId);
+    // A greeting with the same English (ahlan and marḥaba both mean "hello") is the
+    // same greeting said another way, so its replies are right too: never offer them,
+    // or those greetings, as wrong choices.
+    const sameEnglish = new Set(pool.filter((p) => p.en === phrase.en).map((p) => p.setId));
+    sameEnglish.add(phrase.setId);
+    const rightReplies = new Set([...sameEnglish].map((id) => sets.get(id)?.reply).filter(Boolean));
+    const usable = pool.filter((p) => !rightReplies.has(p.setId) && !sameEnglish.has(p.setId));
     const replyTargets = new Set([...sets.values()].map((s) => s.reply).filter(Boolean));
     let wrong = wrongOptions(usable.filter((p) => replyTargets.has(p.setId)).map((p) => p.ar), answerText, 3, rng);
     if (wrong.length < 3) {

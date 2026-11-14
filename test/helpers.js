@@ -52,3 +52,30 @@ export function seededRng(seed) {
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 }
+
+// Just enough of a page (document.createElement and friends) to render ui.js in Node.
+export function fakeDocument() {
+  class Element {
+    constructor(tag) {
+      this.tagName = tag.toLowerCase(); this.className = ''; this.attributes = {}; this.children = []; this.own = ''; this.listeners = {};
+    }
+    get textContent() { return this.own + this.children.map((c) => c.textContent).join(''); }
+    set textContent(text) { this.children = []; this.own = String(text); }
+    setAttribute(name, value) { this.attributes[name] = String(value); }
+    getAttribute(name) { return name in this.attributes ? this.attributes[name] : null; }
+    addEventListener(type, fn) { this.listeners[type] = fn; }
+    append(...nodes) { this.children.push(...nodes); }
+    replaceChildren(...nodes) { this.children = nodes; }
+  }
+  return { createElement: (tag) => new Element(tag), createTextNode: (text) => ({ textContent: String(text) }) };
+}
+
+// Every element under root (depth first) that matches the test.
+export function findAll(root, match) {
+  const out = [];
+  for (const child of root.children ?? []) {
+    if (match(child)) out.push(child);
+    out.push(...findAll(child, match));
+  }
+  return out;
+}

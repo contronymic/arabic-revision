@@ -24,6 +24,11 @@ test('two phrases with the same English and no hint are rejected', () => {
   assert.ok(validateLessons([bad]).some(p => p.includes('hello')));
 });
 
+test('a same-English pair where only one has a hint is rejected', () => {
+  const bad = clone(f1); delete bad.sets[1].forms[0].hint;   // "hello" bare, beside "hello (not zubu)"
+  assert.ok(validateLessons([bad]).some(p => p.includes('hello')));
+});
+
 test('a hint without brackets is rejected', () => {
   const bad = clone(f1); bad.sets[0].forms[0].hint = 'not zubu';
   assert.ok(validateLessons([bad]).some(p => p.includes('not zubu')));

@@ -80,7 +80,9 @@ function card(view, act) {
   const { front, back } = view;
   let face;
   if (!view.flipped) {
-    face = el('button', { type: 'button', class: 'card', 'data-focus': true, 'aria-label': 'Show answer', onClick: () => act.flip() },
+    // No aria-label here: it would replace the card's text, and screen readers
+    // would never read the prompt. The "Show answer" button below names the action.
+    face = el('button', { type: 'button', class: 'card', 'data-focus': true, onClick: () => act.flip() },
       el('span', { class: 'big', text: front.text }),
       front.hint && el('span', { class: 'hint', text: front.hint }));
   } else {

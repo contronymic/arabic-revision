@@ -275,3 +275,9 @@ legend {
   margin-top: 1.5rem;
   font-size: 0.9rem;
 }
+
+.loading {
+  padding: 2rem 0;
+  color: var(--muted);
+  text-align: center;
+}

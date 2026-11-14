@@ -14,14 +14,24 @@ export function shouldShowInstallNote(standalone, dismissed) {
   return standalone === false && !dismissed;
 }
 
-export function createApp({ lessons, problems = [], store, now = () => new Date(), rng = Math.random, standalone }) {
-  const state = store.load();
+// markDelayMs: Right and Wrong are ignored this soon after "Show answer", so a
+// quick double tap can't mark the card by accident.
+export function createApp({ lessons, problems = [], store, now = () => new Date(), rng = Math.random, standalone, markDelayMs = 400 }) {
+  let state = store.load();
   let saveFailed = !store.available;
+  let lastSaveOk = true;
   let content = { lessons, problems, ...flatten(lessons) };
   let screen = 'home';
   let round = null;
 
-  const save = () => { if (!store.save(state)) saveFailed = true; };
+  const save = () => {
+    lastSaveOk = store.save(state);
+    if (!lastSaveOk) saveFailed = true;
+  };
+  // Another copy of the site (a second tab, or the app beside a browser tab) may
+  // have saved since we loaded, so re-read before every change rather than
+  // writing an old picture over its work.
+  const refresh = () => { if (store.available && lastSaveOk) state = store.load(); };
   const today = () => localDay(now());
   const phraseById = (id) => content.phrases.find((p) => p.id === id);
 
@@ -90,13 +100,17 @@ export function createApp({ lessons, problems = [], store, now = () => new Date(
       return homeView();
     },
 
+    refresh,
+
     setScope(id) {
       if (id !== SCOPE_ALL && !content.lessons.some((l) => l.id === id)) return;
+      refresh();
       state.prefs.scope = id;
       save();
     },
 
     startCards(dir) {
+      refresh();
       const phrases = pool();
       if (phrases.length === 0) return;
       const ids = pickCards(phrases.map((p) => p.id), dir, state.cards, today(), ROUND_SIZE, rng);
@@ -105,13 +119,17 @@ export function createApp({ lessons, problems = [], store, now = () => new Date(
     },
 
     flip() {
-      if (screen === 'card') round.flipped = true;
+      if (screen !== 'card' || round.flipped) return;
+      round.flipped = true;
+      round.flippedAt = now().getTime();
     },
 
     // Saves straight away, so closing the app mid-round loses nothing.
     mark(right) {
       if (screen !== 'card' || !round.flipped) return;
+      if (now().getTime() - round.flippedAt < markDelayMs) return;
       const phrase = round.items[round.index];
+      refresh();
       recordMark(state, { phraseId: phrase.id, dir: round.dir, right, today: today() });
       save();
       round.results.push({ phrase, right });
@@ -121,6 +139,7 @@ export function createApp({ lessons, problems = [], store, now = () => new Date(
     },
 
     startQuiz() {
+      refresh();
       const phrases = pool();
       if (phrases.length === 0) return;
       const questions = buildQuiz(phrases, content.sets, ROUND_SIZE, rng);
@@ -134,7 +153,11 @@ export function createApp({ lessons, problems = [], store, now = () => new Date(
       const q = round.items[round.index];
       if (!Number.isInteger(i) || i < 0 || i >= q.options.length) return;
       round.chosen = i;
-      const phrase = phraseById(q.phraseId) ?? { ar: q.promptIsArabic ? q.prompt : '', en: q.promptIsArabic ? '' : q.prompt };
+      // What the finish screen lists: the phrase with its answer. For a reply
+      // question, that is the right reply and what it answers.
+      const phrase = q.type === 'reply'
+        ? { ar: q.options[q.answer], en: `reply to ${q.prompt}` }
+        : phraseById(q.phraseId) ?? { ar: q.promptIsArabic ? q.prompt : '', en: q.promptIsArabic ? '' : q.prompt };
       round.results.push({ phrase, right: i === q.answer });
     },
 
@@ -151,6 +174,7 @@ export function createApp({ lessons, problems = [], store, now = () => new Date(
     },
 
     dismissInstallNote() {
+      refresh();
       state.prefs.installNoteDismissed = true;
       save();
     },

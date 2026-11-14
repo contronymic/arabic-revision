@@ -1,26 +1,18 @@
 // Start-up: open storage, load the lessons, draw the screen, and redraw after each tap.
 import { loadLessons } from './lessons.js';
-import { createStore } from './store.js';
+import { createStore, STORAGE_KEY } from './store.js';
 import { createApp } from './app.js';
 import { render } from './ui.js';
+import { getStorage, startOfflineCopy, checkForUpdate, isStandalone } from './platform.js';
 
-let storage = null;
-try {
-  storage = window.localStorage;
-} catch {
-  storage = null;
-}
+startOfflineCopy(navigator);
 
-// The offline copy and the Home Screen app. Neither is essential, so failures are ignored.
-navigator.serviceWorker?.register('./sw.js').catch(() => {});
-navigator.storage?.persist?.()?.catch(() => {});
-
-const store = createStore(storage);
+const store = createStore(getStorage(window));
 const fetchLessons = () => loadLessons((url) => fetch(url));
 const root = document.getElementById('app');
 
 const { lessons, problems } = await fetchLessons();
-const app = createApp({ lessons, problems, store, standalone: navigator.standalone });
+const app = createApp({ lessons, problems, store, standalone: isStandalone(navigator) });
 
 let shown = '';
 function draw() {
@@ -37,13 +29,26 @@ function draw() {
 const METHODS = ['setScope', 'startCards', 'flip', 'mark', 'startQuiz', 'choose', 'next', 'goHome', 'dismissInstallNote'];
 const act = Object.fromEntries(METHODS.map((name) => [name, (...args) => { app[name](...args); draw(); }]));
 
+// Redraws screens that show progress, after progress was re-read.
+function refreshProgress() {
+  app.refresh();
+  const screen = app.view().screen;
+  if (screen === 'home' || screen === 'done') draw();
+}
+
 draw();
 
+// Another open copy of the site (a second tab, or the app beside a browser tab) saved progress.
+window.addEventListener('storage', (event) => {
+  if (event.key === STORAGE_KEY || event.key === null) refreshProgress();
+});
+
 // A Home Screen app is often resumed rather than reloaded, so look for new
-// or corrected lessons whenever it comes back to the front.
+// or corrected lessons, and other copies' progress, whenever it comes back to the front.
 document.addEventListener('visibilitychange', async () => {
   if (document.visibilityState !== 'visible') return;
-  navigator.serviceWorker?.getRegistration().then((r) => r?.update()).catch(() => {});
+  checkForUpdate(navigator);
+  refreshProgress();
   if (app.view().screen !== 'home') return;
   const fresh = await fetchLessons();
   if (fresh.lessons.length === 0) return;

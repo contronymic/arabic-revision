@@ -22,6 +22,7 @@ const SITE_EXT = /\.(html|css|js|json|webmanifest)$/;
 
 test('the page asks search engines not to list it', () => assert.match(read('index.html'), /<meta name="robots" content="noindex">/));
 test('the page allows nothing from another site', () => assert.match(read('index.html'), /default-src 'self'/));
+test('the page shows something while it starts', () => assert.match(read('index.html'), /<main id="app">\s*<p[^>]*>Loading…<\/p>/));
 test('zoom is not blocked', () => assert.doesNotMatch(read('index.html'), /user-scalable|maximum-scale/));
 test('no site file links to another site', () => {
   for (const f of siteFiles().filter(f => SITE_EXT.test(f))) assert.doesNotMatch(read(f), /https?:\/\/|["'(]\/\//, f);

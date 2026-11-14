@@ -62,6 +62,18 @@ export function validateLessons(lessons) {
       }
     }
 
+    // Phrases sharing their English must all carry a hint, or a bare front has two answers.
+    const byEnglish = new Map();
+    for (const form of lessons.flatMap((l) => (Array.isArray(l?.sets) ? l.sets : []))
+      .flatMap((s) => (Array.isArray(s?.forms) ? s.forms : []))) {
+      if (typeof form?.en === 'string') byEnglish.set(form.en, [...(byEnglish.get(form.en) ?? []), form]);
+    }
+    for (const form of lesson.sets.flatMap((s) => (Array.isArray(s?.forms) ? s.forms : []))) {
+      if ((byEnglish.get(form?.en)?.length ?? 0) > 1 && form.hint === undefined) {
+        problems.push(`${where}: "${form.en}" (${form.id}) shares its English with another phrase, so it needs a hint.`);
+      }
+    }
+
     for (const [path, text] of strings(lesson, where)) {
       if (text !== text.normalize('NFC')) problems.push(`${path}: "${text}" is not in NFC form.`);
       if (LINK.test(text)) problems.push(`${path}: "${text}" contains a link.`);

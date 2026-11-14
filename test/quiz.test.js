@@ -44,6 +44,17 @@ test('a reply question offers exactly one form of the right reply', () => {
   assert.equal(makeQuestion('reply', byId('hi'), phrases, partial, seededRng(1)), null);
 });
 
+test('a reply question counts the replies of a same-English greeting as right too', () => {
+  const g = structuredClone(f1); g.sets[1].reply = 'welcome';   // now both "hello"s have a reply
+  const { phrases: ps, sets: ss } = flatten([g, f2]);
+  const hi = ps.find((p) => p.id === 'hi'), rightReplies = ['zabi bak', 'zabi bik', '\u0639azwa'];
+  for (let seed = 1; seed <= 50; seed++) {
+    const q = makeQuestion('reply', hi, ps, ss, seededRng(seed));
+    assert.equal(q.options.filter(o => rightReplies.includes(o)).length, 1, q.options.join(' / '));
+    assert.ok(!q.options.includes('zubu'));
+  }
+});
+
 test("a form question offers the set's own forms", () => {
   const q = makeQuestion('form', byId('glada'), phrases, sets, seededRng(1));
   assert.equal(q.prompt, 'glad (f)'); assert.equal(q.options[q.answer], 'fāriza');

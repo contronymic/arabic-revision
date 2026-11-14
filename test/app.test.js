@@ -7,10 +7,11 @@ import { readJson, memoryStorage, throwingStorage, seededRng } from './helpers.j
 const f1 = readJson('test/fixtures/lessons/lesson-01.json');
 const f2 = readJson('test/fixtures/lessons/lesson-02.json');
 
-function makeApp({ storage = memoryStorage(), day = '2026-11-14', standalone } = {}) {
+// markDelayMs: 0 because this clock never moves; the double-tap guard has its own test.
+function makeApp({ storage = memoryStorage(), day = '2026-11-14', standalone, seed = 7 } = {}) {
   const [y, m, d] = day.split('-').map(Number);
   return createApp({ lessons: [f1, f2], problems: [], store: createStore(storage),
-    now: () => new Date(y, m - 1, d, 9, 0), rng: seededRng(7), standalone });
+    now: () => new Date(y, m - 1, d, 9, 0), rng: seededRng(seed), standalone, markDelayMs: 0 });
 }
 const flipAndMark = (app, right) => { app.flip(); app.mark(right); };
 // Marks cards right until done(view) holds; gives up after 20 steps so a bug can't hang the run.
@@ -115,4 +116,43 @@ test('setLessons swaps the lessons and keeps progress', () => {
   app.setLessons([f1], []);
   assert.equal(app.view().stats.overall.total, 10);
   assert.equal(createStore(storage).load().cards[`${id}|en-ar`].box, 1);
+});
+
+test("two copies open on one phone never erase each other's marks", () => {
+  const storage = memoryStorage();
+  const b = makeApp({ storage });   // opened first, then left in the background
+  const a = makeApp({ storage });
+  a.setScope('lesson-01'); a.startCards('en-ar'); stepUntil(a, v => v.screen === 'done');   // 10 marks
+  b.startCards('ar-en'); flipAndMark(b, true);   // one mark in the older copy
+  assert.equal(Object.keys(createStore(storage).load().cards).length, 11);
+  b.goHome(); b.refresh();
+  assert.equal(b.view().scope, 'lesson-01');   // coming back to the front picks up the other copy's changes
+});
+
+test('a quick second tap after "Show answer" does not mark the card', () => {
+  let t = Date.UTC(2026, 10, 14, 9, 0);
+  const app = createApp({ lessons: [f1, f2], store: createStore(memoryStorage()), now: () => new Date(t), rng: seededRng(7) });
+  app.startCards('en-ar'); app.flip();
+  t += 150; app.mark(true);
+  assert.equal(app.view().position, 1);   // ignored: too soon after the flip
+  t += 500; app.mark(true);
+  assert.equal(app.view().position, 2);
+});
+
+test('the finish screen lists the right answer for every missed question, replies included', () => {
+  let replies = 0;
+  for (let seed = 1; seed <= 30; seed++) {
+    const app = makeApp({ seed }); app.startQuiz();
+    const asked = [];
+    for (let i = 0; i < 20 && app.view().screen === 'quiz'; i++) {
+      const q = app.view().question; asked.push(q); app.choose((q.answer + 1) % q.options.length); app.next();
+    }
+    const missed = app.view().missed;
+    asked.forEach((q, i) => {
+      if (q.type === 'reply') replies++;
+      const right = q.options[q.answer];
+      assert.ok(missed[i].ar === right || missed[i].en === right, `${q.type}: ${JSON.stringify(missed[i])} lacks ${right}`);
+    });
+  }
+  assert.ok(replies > 0, 'no reply question came up');
 });
