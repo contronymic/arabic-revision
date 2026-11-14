@@ -1,0 +1,4 @@
+{ "id": "lesson-02", "title": "Fixture 2", "sets": [
+  { "id": "big", "forms": [ { "id": "big", "ar": "kabzu", "en": "big" } ] },
+  { "id": "small", "forms": [ { "id": "small", "ar": "ziḍu", "en": "small" } ] },
+  { "id": "day", "forms": [ { "id": "day", "ar": "yawzi", "en": "day" } ] } ] }

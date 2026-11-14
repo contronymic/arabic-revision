@@ -1,0 +1,10 @@
+{ "id": "lesson-01", "title": "Fixture 1", "sets": [
+  { "id": "hi", "reply": "hi-back", "forms": [ { "id": "hi", "ar": "zabi", "en": "hello", "hint": "(not zubu)" } ] },
+  { "id": "hi2", "forms": [ { "id": "hi2", "ar": "zubu", "en": "hello", "hint": "(not zabi)" } ] },
+  { "id": "hi-back", "forms": [ { "id": "hi-back-m", "ar": "zabi bak", "en": "hi back (to a man)" },
+                                { "id": "hi-back-f", "ar": "zabi bik", "en": "hi back (to a woman)" } ] },
+  { "id": "glad", "note": "A note.", "forms": [ { "id": "glad", "ar": "fāriz", "en": "glad (m)" },
+      { "id": "glada", "ar": "fāriza", "en": "glad (f)" }, { "id": "gladin", "ar": "fārizīn", "en": "glad (pl)" } ] },
+  { "id": "yes", "forms": [ { "id": "yes", "ar": "ayzu", "en": "yes" } ] },
+  { "id": "thanks", "reply": "welcome", "forms": [ { "id": "thanks", "ar": "šukzi", "en": "thanks" } ] },
+  { "id": "welcome", "forms": [ { "id": "welcome", "ar": "عazwa", "en": "you are welcome" } ] } ] }
