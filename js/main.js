@@ -11,6 +11,10 @@ try {
   storage = null;
 }
 
+// The offline copy and the Home Screen app. Neither is essential, so failures are ignored.
+navigator.serviceWorker?.register('./sw.js').catch(() => {});
+navigator.storage?.persist?.()?.catch(() => {});
+
 const store = createStore(storage);
 const fetchLessons = () => loadLessons((url) => fetch(url));
 const root = document.getElementById('app');
@@ -38,7 +42,9 @@ draw();
 // A Home Screen app is often resumed rather than reloaded, so look for new
 // or corrected lessons whenever it comes back to the front.
 document.addEventListener('visibilitychange', async () => {
-  if (document.visibilityState !== 'visible' || app.view().screen !== 'home') return;
+  if (document.visibilityState !== 'visible') return;
+  navigator.serviceWorker?.getRegistration().then((r) => r?.update()).catch(() => {});
+  if (app.view().screen !== 'home') return;
   const fresh = await fetchLessons();
   if (fresh.lessons.length === 0) return;
   app.setLessons(fresh.lessons, fresh.problems);
