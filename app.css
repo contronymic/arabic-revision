@@ -1,0 +1,277 @@
+/* Phone-first styles. Sizes are in rem so the phone's text-size setting applies. */
+
+:root {
+  color-scheme: light dark;
+  --bg: #FFFFFF;
+  --surface: #F1F5F3;
+  --text: #1C2421;
+  --muted: #56635F;
+  --border: #CFDBD5;
+  --accent: #2F5D50;
+  --on-accent: #FFFFFF;
+  --highlight: #E2EEE8;
+  --right: #2E7D4F;
+  --on-right: #FFFFFF;
+  --wrong: #B3452C;
+  --on-wrong: #FFFFFF;
+  --warn-bg: #FFF4E0;
+  --warn-text: #5C3B00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111614;
+    --surface: #1B2320;
+    --text: #E6ECE9;
+    --muted: #A3B0AB;
+    --border: #33413B;
+    --accent: #8CC4AE;
+    --on-accent: #0E1714;
+    --highlight: #23352D;
+    --right: #74C493;
+    --on-right: #0E1714;
+    --wrong: #EE9279;
+    --on-wrong: #0E1714;
+    --warn-bg: #3A2C12;
+    --warn-text: #F6DDB0;
+  }
+}
+
+/* On iPhone, follow the Text Size setting (Settings → Display & Brightness). */
+@supports (-webkit-touch-callout: none) {
+  html { font: -apple-system-body; }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.4;
+}
+
+#app {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: env(safe-area-inset-top) calc(1rem + env(safe-area-inset-right)) 0 calc(1rem + env(safe-area-inset-left));
+}
+
+.content {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+.actions {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 0 calc(0.75rem + env(safe-area-inset-bottom));
+  background: var(--bg);
+}
+
+.row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.row > button { flex: 1; }
+
+h1, h2, h3 { line-height: 1.2; margin: 0 0 0.75rem; }
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.1rem; margin-top: 1.25rem; }
+p { margin: 0 0 0.75rem; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--muted);
+}
+
+.topbar button {
+  width: auto;
+  min-height: 2.75rem;
+  padding: 0.25rem 1rem;
+}
+
+button {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button:focus-visible,
+input:focus-visible + span {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:disabled { opacity: 0.5; cursor: default; }
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+
+button.right { background: var(--right); border-color: var(--right); color: var(--on-right); font-weight: 600; }
+button.wrong { background: var(--wrong); border-color: var(--wrong); color: var(--on-wrong); font-weight: 600; }
+
+.sub {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+/* The card itself: a big tap target in the middle of the screen. */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 12rem;
+  padding: 1.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--surface);
+  text-align: center;
+}
+
+.big {
+  font-size: 1.75rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.hint, .muted { color: var(--muted); }
+.hint { margin-top: 0.5rem; font-size: 1rem; }
+.asked { color: var(--muted); margin-bottom: 0.5rem; overflow-wrap: anywhere; }
+
+.set, .missed, .stats {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.set li, .missed li {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+.set li.current { background: var(--highlight); font-weight: 600; }
+.set .ar, .missed .ar { font-weight: 600; }
+
+.stats li { padding: 0.25rem 0; }
+
+.note {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.notice {
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: var(--warn-bg);
+  color: var(--warn-text);
+  margin-bottom: 1rem;
+}
+
+.notice button { margin-top: 0.5rem; }
+
+fieldset {
+  margin: 0 0 1rem;
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.scope {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.scope label { flex: 1 1 8rem; }
+
+.scope input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scope span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+  text-align: center;
+  cursor: pointer;
+}
+
+.scope input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+
+.instruction { color: var(--muted); }
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.options button { overflow-wrap: anywhere; }
+.options button.is-answer { background: var(--right); border-color: var(--right); color: var(--on-right); font-weight: 600; }
+.options button.is-wrong { background: var(--wrong); border-color: var(--wrong); color: var(--on-wrong); }
+.options button:disabled { opacity: 1; cursor: default; }
+
+.feedback {
+  min-height: 1.5rem;
+  margin-top: 0.75rem;
+  font-weight: 600;
+}
+
+.footer {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+}
