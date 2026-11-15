@@ -11,6 +11,7 @@ function fromDisk() {
   for (const f of ['index.html', 'app.css', 'manifest.webmanifest']) files[f] = readFileSync(f, 'utf8');
   for (const f of readdirSync('js').filter(f => f.endsWith('.js'))) files['js/' + f] = readFileSync('js/' + f, 'utf8');
   for (const f of readdirSync('icons').filter(f => f.endsWith('.png'))) files['icons/' + f] = readFileSync('icons/' + f);
+  for (const f of readdirSync('fonts').filter(f => f.endsWith('.woff2'))) files['fonts/' + f] = readFileSync('fonts/' + f);
   for (const f of readdirSync('lessons').filter(f => f.endsWith('.json'))) files['lessons/' + f] = readFileSync('lessons/' + f, 'utf8');
   return files;
 }
@@ -18,7 +19,8 @@ function fromDisk() {
 test('SHELL_FILES lists every file the page needs', () => {
   const env = createSwEnv(fromDisk());
   const expected = ['./', './index.html', './app.css', './manifest.webmanifest',
-    ...readdirSync('js').filter(f => f.endsWith('.js')).map(f => './js/' + f), './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png'];
+    ...readdirSync('js').filter(f => f.endsWith('.js')).map(f => './js/' + f), './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png',
+    ...readdirSync('fonts').filter(f => f.endsWith('.woff2')).map(f => './fonts/' + f)];
   assert.deepEqual(new Set(env.run('SHELL_FILES')), new Set(expected));
 });
 

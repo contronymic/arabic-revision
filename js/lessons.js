@@ -6,7 +6,7 @@ const isString = (v) => typeof v === 'string';
 const isOptionalString = (v) => v === undefined || isString(v);
 
 export function isUsableLesson(lesson) {
-  return Boolean(lesson) && isString(lesson.id) && isString(lesson.title)
+  return Boolean(lesson) && isString(lesson.id) && isString(lesson.title) && isOptionalString(lesson.summary)
     && Array.isArray(lesson.sets) && lesson.sets.length > 0
     && lesson.sets.every((set) => Boolean(set) && isString(set.id)
       && isOptionalString(set.reply) && isOptionalString(set.note)
@@ -68,4 +68,39 @@ export async function loadLessons(fetchFn, base = 'lessons/') {
     lessons: results.filter((r) => r.lesson).map((r) => r.lesson),
     problems: results.filter((r) => r.problem).map((r) => r.problem),
   };
+}
+
+// Forms. A phrase's English may end in a label saying which form it is:
+// "(to a man)", "(to a woman)" or "(to a group)" for who is spoken to, and
+// "(said by a …)" or "(m)", "(f)", "(pl)" for the grammatical form.
+const TO = /^(.+?)\s*\(to a (man|woman|group)\)$/u;
+const GRAMMAR = /^(.+?)\s*\((?:said by a (man|woman|group)|(m|f|pl))\)$/u;
+// The one table of forms: who each is for, its name, and its short label.
+const LABEL = { man: 'masculine', woman: 'feminine', group: 'plural' };
+const SHORT = { m: 'man', f: 'woman', pl: 'group' };
+
+// { base } for a phrase with one form; plus { to } for who is spoken to, or
+// { label, who } for the grammatical form and who it is for, with { by } when
+// the English names who says it.
+export function describeForm(en) {
+  let m = en.match(TO);
+  if (m) return { base: m[1], to: m[2] };
+  m = en.match(GRAMMAR);
+  if (m) {
+    const who = m[2] ?? SHORT[m[3]];
+    return { base: m[1], label: LABEL[who], who, ...(m[2] ? { by: m[2] } : {}) };
+  }
+  return { base: en };
+}
+
+const join = (base, words) => `${base}${/[?…]$/u.test(base) ? ' ' : ', '}${words}`;
+
+// The English as an answer choice: "please, offering something, to a woman",
+// "how are you? to a man", "sorry, said by a man", "busy (feminine)".
+export function englishAnswer(en) {
+  const { base, to, label, by } = describeForm(en);
+  if (to) return join(base, `to a ${to}`);
+  if (by) return join(base, `said by a ${by}`);
+  if (label) return `${base} (${label})`;
+  return en;
 }

@@ -1,39 +1,90 @@
-/* Phone-first styles. Sizes are in rem so the phone's text-size setting applies. */
+/* X-Clacks-Overhead: GNU Terry Pratchett */
 
-:root {
-  color-scheme: light dark;
-  --bg: #FFFFFF;
-  --surface: #F1F5F3;
-  --text: #1C2421;
-  --muted: #56635F;
-  --border: #CFDBD5;
-  --accent: #2F5D50;
-  --on-accent: #FFFFFF;
-  --highlight: #E2EEE8;
-  --right: #2E7D4F;
-  --on-right: #FFFFFF;
-  --wrong: #B3452C;
-  --on-wrong: #FFFFFF;
-  --warn-bg: #FFF4E0;
-  --warn-text: #5C3B00;
+/* The fonts live beside the site (fonts/, with their licences), so it works offline. */
+@font-face {
+  font-family: "Alegreya"; font-style: normal; font-weight: 400 900; font-display: swap;
+  src: url("fonts/alegreya-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Alegreya"; font-style: normal; font-weight: 400 900; font-display: swap;
+  src: url("fonts/alegreya-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Alegreya"; font-style: italic; font-weight: 400 900; font-display: swap;
+  src: url("fonts/alegreya-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Alegreya"; font-style: italic; font-weight: 400 900; font-display: swap;
+  src: url("fonts/alegreya-italic-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Pixelify Sans"; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url("fonts/pixelify-sans-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "VT323"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("fonts/vt323-latin.woff2") format("woff2");
 }
 
+/* Parchment (light). */
+:root {
+  color-scheme: light dark;
+  --surface: #f4efe6;
+  --surface-raised: #fbf8f2;
+  --surface-sunken: #e7e0d3;
+  --surface-tint: #e3eee9;
+  --ink: #241b2f;
+  --ink-muted: #5b4f66;
+  --rule: #d0c7c0;
+  --rupee: #1f6e5a;
+  --on-rupee: #fbf8f2;
+  --gold: #d9a521;
+  --on-gold: #241b2f;
+  --octarine: #8a2f9e;
+  --heart: #b3263a;
+  --on-heart: #fbf8f2;
+  --mana: #2b5a96;
+  --focus: var(--octarine);
+  --shadow-pixel: 4px 4px 0 0 #241b2f;
+  --shadow-pixel-sm: 2px 2px 0 0 #241b2f;
+
+  --font-pixel: "Pixelify Sans", "Courier New", monospace;
+  --font-serif: Alegreya, Georgia, "Times New Roman", serif;
+  --font-hud: VT323, "Courier New", monospace;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --frame: 3px solid var(--ink);
+}
+
+/* Underdark (dark). */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #111614;
-    --surface: #1B2320;
-    --text: #E6ECE9;
-    --muted: #A3B0AB;
-    --border: #33413B;
-    --accent: #8CC4AE;
-    --on-accent: #0E1714;
-    --highlight: #23352D;
-    --right: #74C493;
-    --on-right: #0E1714;
-    --wrong: #EE9279;
-    --on-wrong: #0E1714;
-    --warn-bg: #3A2C12;
-    --warn-text: #F6DDB0;
+    --surface: #12161f;
+    --surface-raised: #1b2130;
+    --surface-sunken: #0c0f15;
+    --surface-tint: #17222a;
+    --ink: #e9ecf2;
+    --ink-muted: #a3adbf;
+    --rule: #2e3647;
+    --rupee: #6fd08c;
+    --on-rupee: #0c1a11;
+    --gold: #f2c14e;
+    --on-gold: #12161f;
+    --octarine: #d39bff;
+    --heart: #ff8a80;
+    --on-heart: #12161f;
+    --mana: #7ab8ff;
+    --shadow-pixel: 4px 4px 0 0 #05070a;
+    --shadow-pixel-sm: 2px 2px 0 0 #05070a;
   }
 }
 
@@ -49,10 +100,13 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.4;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.55;
+  /* Alegreya's old-style figures make "0%" look like "o%". */
+  font-variant-numeric: lining-nums;
 }
 
 #app {
@@ -63,12 +117,12 @@ body {
   min-height: 100svh;
   max-width: 32rem;
   margin: 0 auto;
-  padding: env(safe-area-inset-top) calc(1rem + env(safe-area-inset-right)) 0 calc(1rem + env(safe-area-inset-left));
+  padding: env(safe-area-inset-top) calc(var(--space-4) + env(safe-area-inset-right)) 0 calc(var(--space-4) + env(safe-area-inset-left));
 }
 
 .content {
   flex: 1;
-  padding: 1rem 0;
+  padding: var(--space-4) 0;
 }
 
 .actions {
@@ -76,154 +130,167 @@ body {
   bottom: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.75rem 0 calc(0.75rem + env(safe-area-inset-bottom));
-  background: var(--bg);
+  gap: var(--space-3);
+  padding: var(--space-3) 0 calc(var(--space-4) + env(safe-area-inset-bottom));
+  background: var(--surface);
+  border-top: 3px solid var(--rule);
 }
 
-.row {
-  display: flex;
-  gap: 0.5rem;
+/* Pixel type for the chrome, and it stops at heading-2. */
+h1, h2 {
+  font-family: var(--font-pixel);
+  font-weight: 600;
+  margin: 0 0 var(--space-3);
+}
+h1 { font-size: 2rem; line-height: 1.12; }
+h2 { font-size: 1.5rem; line-height: 1.25; }
+h3 { font-size: 1.25rem; line-height: 1.3; font-weight: 700; margin: var(--space-4) 0 var(--space-2); }
+p { margin: 0 0 var(--space-3); }
+
+.loading {
+  padding: var(--space-8) 0;
+  color: var(--ink-muted);
+  font-family: var(--font-hud);
+  font-size: 1.4rem;
+  text-align: center;
 }
 
-.row > button { flex: 1; }
-
-h1, h2, h3 { line-height: 1.2; margin: 0 0 0.75rem; }
-h1 { font-size: 1.6rem; }
-h2 { font-size: 1.35rem; }
-h3 { font-size: 1.1rem; margin-top: 1.25rem; }
-p { margin: 0 0 0.75rem; }
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-  color: var(--muted);
-}
-
-.topbar button {
-  width: auto;
-  min-height: 2.75rem;
-  padding: 0.25rem 1rem;
-}
-
+/* ---------- Buttons: framed, a hard shadow, and they press in. ---------- */
 button {
   box-sizing: border-box;
   width: 100%;
   min-height: 3rem;
-  padding: 0.6rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  background: var(--surface);
-  color: var(--text);
-  font: inherit;
+  padding: var(--space-2) var(--space-4);
+  border: var(--frame);
+  border-radius: 0;
+  background: var(--surface-raised);
+  color: var(--ink);
+  box-shadow: var(--shadow-pixel);
+  font-family: var(--font-pixel);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.25;
   text-align: center;
   cursor: pointer;
   touch-action: manipulation;
+  transition: transform 80ms steps(2), box-shadow 80ms steps(2);
+}
+
+button:active:not(:disabled) { transform: translate(2px, 2px); box-shadow: var(--shadow-pixel-sm); }
+
+button.primary {
+  background: var(--rupee);
+  color: var(--on-rupee);
+  font-weight: 600;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background: var(--surface-sunken);
+  color: var(--ink-muted);
+  border-style: dashed;
+  box-shadow: none;
 }
 
 button:focus-visible,
-input:focus-visible + span {
-  outline: 3px solid var(--accent);
+input:focus-visible + .choice {
+  outline: 3px solid var(--focus);
   outline-offset: 2px;
 }
 
-button:disabled { opacity: 0.5; cursor: default; }
-
-button.primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--on-accent);
-  font-weight: 600;
+@media (prefers-reduced-motion: reduce) {
+  button { transition: none; }
 }
-
-button.right { background: var(--right); border-color: var(--right); color: var(--on-right); font-weight: 600; }
-button.wrong { background: var(--wrong); border-color: var(--wrong); color: var(--on-wrong); font-weight: 600; }
 
 .sub {
   display: block;
-  font-size: 0.85rem;
+  margin-top: 2px;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
   font-weight: 400;
-  opacity: 0.9;
+  line-height: 1.3;
 }
 
-/* The card itself: a big tap target in the middle of the screen. */
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 12rem;
-  padding: 1.5rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  background: var(--surface);
-  text-align: center;
-}
-
-.big {
-  font-size: 1.75rem;
-  font-weight: 600;
-  overflow-wrap: anywhere;
-}
-
-.hint, .muted { color: var(--muted); }
-.hint { margin-top: 0.5rem; font-size: 1rem; }
-.asked { color: var(--muted); margin-bottom: 0.5rem; overflow-wrap: anywhere; }
-
-.set, .missed, .stats {
-  list-style: none;
-  margin: 0 0 1rem;
-  padding: 0;
-}
-
-.set li, .missed li {
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
-  overflow-wrap: anywhere;
-}
-
-.set li.current { background: var(--highlight); font-weight: 600; }
-.set .ar, .missed .ar { font-weight: 600; }
-
-.stats li { padding: 0.25rem 0; }
-
-.note {
-  margin-top: 1rem;
-  color: var(--muted);
-  font-style: italic;
-}
-
+/* ---------- Notices: warnings are gold. ---------- */
 .notice {
-  padding: 0.75rem 1rem;
-  border-radius: 0.75rem;
-  background: var(--warn-bg);
-  color: var(--warn-text);
-  margin-bottom: 1rem;
+  padding: var(--space-3) var(--space-4);
+  border: var(--frame);
+  background: var(--gold);
+  color: var(--on-gold);
+  box-shadow: var(--shadow-pixel-sm);
+  margin-bottom: var(--space-4);
+}
+.notice p { margin: 0; }
+.notice button { margin-top: var(--space-3); }
+
+/* ---------- Home ---------- */
+.home h1 { text-align: center; text-wrap: balance; }
+.home h2 { margin-top: var(--space-8); margin-bottom: var(--space-3); }
+.home h3.stat { margin: 0 0 var(--space-2); font-size: 1.15rem; }
+
+/* The flag of Palestine (1:2; the red triangle reaches a third of the length),
+   in a pixel frame like everything else. */
+.flag {
+  box-sizing: content-box;
+  width: 4.5rem;
+  aspect-ratio: 2 / 1;
+  margin: var(--space-2) auto var(--space-4);
+  background: linear-gradient(#000000 0 33.34%, #FFFFFF 0 66.67%, #009736 0);
+  border: var(--frame);
+  box-shadow: var(--shadow-pixel-sm);
+  position: relative;
 }
 
-.notice button { margin-top: 0.5rem; }
-
-fieldset {
-  margin: 0 0 1rem;
-  padding: 0;
-  border: 0;
+.flag::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 33.34%;
+  background: #EE2A35;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
-legend {
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+/* Progress: a pixel bar under each line. The line itself says the numbers. */
+.bar {
+  display: block;
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 1rem;
+  margin: 0 0 var(--space-3);
+  border: var(--frame);
+  background: var(--surface-sunken);
+  color: var(--rupee);
 }
+.bar::-webkit-progress-bar { background: var(--surface-sunken); }
+.bar::-webkit-progress-value { background: var(--rupee); }
+.bar::-moz-progress-bar { background: var(--rupee); }
+
+/* A footnote, marked with an octarine asterisk. */
+.progress-note {
+  margin: var(--space-2) 0 0;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+  font-style: italic;
+  line-height: 1.45;
+}
+.progress-note::before {
+  content: "* ";
+  color: var(--octarine);
+  font-family: var(--font-pixel);
+  font-style: normal;
+}
+
+fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+legend { padding: 0; }
 
 .scope {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  padding: 0 4px 4px 0;
 }
-
-.scope label { flex: 1 1 8rem; }
 
 .scope input {
   position: absolute;
@@ -231,53 +298,169 @@ legend {
   pointer-events: none;
 }
 
-.scope span {
+.scope label { display: flex; }
+
+.scope .choice {
+  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 3rem;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  background: var(--surface);
+  min-height: 3.5rem;
+  padding: var(--space-3);
+  border: var(--frame);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-pixel);
+  font-family: var(--font-pixel);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.25;
   text-align: center;
   cursor: pointer;
+  transition: transform 80ms steps(2), box-shadow 80ms steps(2);
 }
 
-.scope input:checked + span {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--on-accent);
+/* A choice with no summary fills its box with a bigger label. */
+.scope .lone { font-size: 1.3rem; text-wrap: balance; }
+
+/* The chosen lesson is pressed in and inked. */
+.scope input:checked + .choice {
+  background: var(--ink);
+  color: var(--surface-raised);
   font-weight: 600;
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-pixel-sm);
 }
 
-.instruction { color: var(--muted); }
+.modes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: var(--space-6) 0 var(--space-4);
+  padding: 0 4px 4px 0;
+}
+
+.mode { min-height: 3.5rem; font-weight: 600; }
+
+/* ---------- A question ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.count {
+  font-family: var(--font-hud);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--ink-muted);
+}
+
+.topbar button {
+  width: auto;
+  min-height: 2.5rem;
+  padding: 0 var(--space-3);
+  border-width: 2px;
+  box-shadow: var(--shadow-pixel-sm);
+}
+
+/* The question is a dialogue box: a double frame. */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 9rem;
+  padding: var(--space-6) var(--space-4);
+  border: var(--frame);
+  background: var(--surface-raised);
+  box-shadow: inset 0 0 0 3px var(--surface-raised), inset 0 0 0 5px var(--ink), var(--shadow-pixel);
+  text-align: center;
+}
+
+.ask { margin: 0; font-size: 1.2rem; line-height: 1.4; overflow-wrap: anywhere; }
+.ask strong { font-weight: 700; }
+.ask + .big { margin-top: var(--space-3); }
+
+.big {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.hint { margin: var(--space-2) 0 0; color: var(--ink-muted); font-size: 1rem; font-style: italic; }
 
 .options {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding: 0 4px 4px 0;
 }
 
-.options button { overflow-wrap: anywhere; }
-.options button.is-answer { background: var(--right); border-color: var(--right); color: var(--on-right); font-weight: 600; }
-.options button.is-wrong { background: var(--wrong); border-color: var(--wrong); color: var(--on-wrong); }
-.options button:disabled { opacity: 1; cursor: default; }
+/* Answers are read, so they are set in the serif. */
+.options button {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.options button:disabled { cursor: default; border-style: solid; background: var(--surface-raised); color: var(--ink-muted); box-shadow: var(--shadow-pixel-sm); }
+/* Right and wrong carry a mark as well as a colour. */
+.options button.is-answer { background: var(--rupee); color: var(--on-rupee); font-weight: 700; }
+.options button.is-answer::after { content: " ✓"; }
+.options button.is-wrong { background: var(--heart); color: var(--on-heart); }
+.options button.is-wrong::after { content: " ✗"; }
 
 .feedback {
   min-height: 1.5rem;
-  margin-top: 0.75rem;
+  margin: var(--space-6) 0 var(--space-2);
+  font-weight: 700;
+}
+
+.feedback.praise {
+  margin: var(--space-6) 0 var(--space-3);
+  color: var(--rupee);
+  font-family: var(--font-pixel);
+  font-size: 1.75rem;
   font-weight: 600;
-}
-
-.footer {
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-}
-
-.loading {
-  padding: 2rem 0;
-  color: var(--muted);
+  line-height: 1.2;
   text-align: center;
+}
+
+.explain { margin-bottom: var(--space-2); overflow-wrap: anywhere; }
+
+.set, .missed {
+  list-style: none;
+  margin: var(--space-4) 0;
+  padding: 0;
+  border: var(--frame);
+  background: var(--surface-raised);
+}
+
+.set li, .missed li {
+  padding: var(--space-2) var(--space-3);
+  overflow-wrap: anywhere;
+}
+.set li + li, .missed li + li { border-top: 2px solid var(--rule); }
+
+.set li.current { background: var(--surface-tint); font-weight: 700; }
+.set .ar, .missed .ar { font-weight: 700; }
+
+.note {
+  margin-top: var(--space-4);
+  color: var(--ink-muted);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* ---------- The end of a round ---------- */
+.score {
+  font-family: var(--font-pixel);
+  text-align: center;
+  margin-top: var(--space-4);
 }

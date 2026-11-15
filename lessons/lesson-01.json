@@ -1,6 +1,7 @@
 {
   "id": "lesson-01",
   "title": "Lesson 1",
+  "summary": "Key words (yes, no, thanks...), greetings, introductions",
   "sets": [
     { "id": "ahlan", "reply": "ahlan-bika", "forms": [
       {"id": "ahlan", "ar": "ahlan", "en": "hello", "hint": "(not marḥaba)"} ] },
@@ -79,10 +80,14 @@
       {"id": "kif-halkum", "ar": "kīf ḥālkum?", "en": "how are you? (to a group)", "hint": "(not kīfkum)"} ] },
     { "id": "ilhamdilla", "forms": [
       {"id": "ilhamdilla", "ar": "ilḥamdilla", "en": "praise be to God"} ] },
-    { "id": "kifak", "reply": "ilhamdilla", "forms": [
+    { "id": "kifak", "reply": "ilhamdilla-mabsut", "forms": [
       {"id": "kifak", "ar": "kīfak?", "en": "how are you? (to a man)", "hint": "(not kīf ḥālak)"},
       {"id": "kifek", "ar": "kīfek?", "en": "how are you? (to a woman)", "hint": "(not kīf ḥālek)"},
       {"id": "kifkum", "ar": "kīfkum?", "en": "how are you? (to a group)", "hint": "(not kīf ḥālkum)"} ] },
+    { "id": "ilhamdilla-mabsut", "forms": [
+      {"id": "ilhamdilla-mabsut", "ar": "ilḥamdilla mabsūṭ", "en": "fine, praise be to God (m)"},
+      {"id": "ilhamdilla-mabsuta", "ar": "ilḥamdilla mabsūṭa", "en": "fine, praise be to God (f)"},
+      {"id": "ilhamdilla-mabsutin", "ar": "ilḥamdilla mabsūṭīn", "en": "fine, praise be to God (pl)"} ] },
     { "id": "mabsut", "forms": [
       {"id": "mabsut", "ar": "mabsūṭ", "en": "fine (m)"},
       {"id": "mabsuta", "ar": "mabsūṭa", "en": "fine (f)"},
@@ -97,6 +102,14 @@
       {"id": "tabanin", "ar": "taعbānīn", "en": "tired (pl)"} ] },
     { "id": "mish", "note": "lā, ana miš mašġūl. — No, I am not busy.", "forms": [
       {"id": "mish", "ar": "miš", "en": "not"} ] },
+    { "id": "inta-mashghul", "reply": "la-ana-mish-mashghul", "forms": [
+      {"id": "inta-mashghul", "ar": "inta mašġūl?", "en": "are you busy? (to a man)"} ] },
+    { "id": "la-ana-mish-mashghul", "forms": [
+      {"id": "la-ana-mish-mashghul", "ar": "lā, ana miš mašġūl", "en": "no, I am not busy (said by a man)"} ] },
+    { "id": "inti-mabsuta", "reply": "naam-ana-mabsuta", "forms": [
+      {"id": "inti-mabsuta", "ar": "inti mabsūṭa?", "en": "are you fine? (to a woman)"} ] },
+    { "id": "naam-ana-mabsuta", "forms": [
+      {"id": "naam-ana-mabsuta", "ar": "naعm, ana mabsūṭa", "en": "yes, I am fine (said by a woman)"} ] },
     { "id": "pronouns", "forms": [
       {"id": "ana", "ar": "ana", "en": "I"},
       {"id": "inta", "ar": "inta", "en": "you (m)"},

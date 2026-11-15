@@ -6,14 +6,7 @@ const TEXT = {
   saveFailed: "This browser isn't saving progress (private browsing?). Rounds still work, but marks won't be kept.",
   someMissing: "Some lessons couldn't be loaded. They'll appear next time you're online.",
   noLessons: 'No lessons yet. Open the site once with a signal to download them.',
-  footer: 'Progress is kept on this phone only.',
-};
-
-const INSTRUCTION = {
-  meaning: 'What does this mean?',
-  arabic: 'Which is the Arabic?',
-  reply: 'Which is a reply?',
-  form: 'Which form?',
+  progressNote: 'A phrase counts as remembered once you answer it correctly in the quiz on two different days.',
 };
 
 // Builds an element. props: class, text, on<Event> handlers, or any attribute.
@@ -34,83 +27,54 @@ function el(tag, props = {}, ...children) {
   return node;
 }
 
-function statsList(stats) {
-  const items = stats.lessons.map((l) => el('li', { text: `${l.title} · ${l.remembered} of ${l.total} remembered · ${l.percent}%` }));
-  if (stats.lessons.length >= 2) {
-    const o = stats.overall;
-    items.push(el('li', { text: `Overall · ${o.remembered} of ${o.total} remembered · ${o.percent}%` }));
-  }
-  return el('ul', { class: 'stats' }, items);
+function statsLine(l) {
+  return `${l.title}: ${l.remembered} of ${l.total} phrases remembered · ${l.percent}%`;
+}
+
+// One line per lesson, and an overall line once there are two lessons or more.
+function statsLines(stats) {
+  const lines = [...stats.lessons];
+  if (stats.lessons.length >= 2) lines.push({ title: 'Overall', ...stats.overall });
+  // The bar only repeats the line, so screen readers skip it.
+  return lines.map((l) => [el('h3', { class: 'stat', text: statsLine(l) }),
+    el('progress', { class: 'bar', max: l.total || 1, value: l.remembered, 'aria-hidden': 'true' })]).flat();
 }
 
 function topbar(position, total, act) {
   return el('div', { class: 'topbar' },
-    el('span', { text: `${position} of ${total}` }),
+    el('span', { class: 'count', text: `${position} of ${total}` }),
     el('button', { type: 'button', onClick: () => act.goHome() }, 'Home'));
 }
 
 function home(view, act) {
   const hasLessons = view.stats.lessons.length > 0;
-  const content = el('div', { class: 'content' },
-    el('h1', { tabindex: '-1', 'data-focus': true }, 'Arabic revision'),
+  const mode = (label, sub, onClick, primary) => el('button', { type: 'button', class: primary ? 'mode primary' : 'mode', disabled: !hasLessons, onClick },
+    label, sub && el('span', { class: 'sub', text: sub }));
+
+  return [el('div', { class: 'content home' },
+    el('div', { class: 'flag', role: 'img', 'aria-label': 'Flag of Palestine' }),
+    el('h1', { tabindex: '-1', 'data-focus': true }, 'Palestinian Arabic Revision'),
     view.installNote && el('div', { class: 'notice', role: 'note' },
       el('p', { text: TEXT.installNote }),
       el('button', { type: 'button', onClick: () => act.dismissInstallNote() }, 'OK')),
     view.saveFailed && el('p', { class: 'notice', text: TEXT.saveFailed }),
-    hasLessons ? statsList(view.stats) : el('p', { text: TEXT.noLessons }),
+    el('h2', { text: 'Progress:' }),
+    hasLessons ? statsLines(view.stats) : el('p', { text: TEXT.noLessons }),
+    hasLessons && el('p', { class: 'muted progress-note', text: TEXT.progressNote }),
     hasLessons && view.problems.length > 0 && el('p', { class: 'notice', text: TEXT.someMissing }),
     hasLessons && el('fieldset', {},
-      el('legend', { text: 'Revise' }),
+      el('legend', {}, el('h2', { text: 'What do you want to work on?' })),
       el('div', { class: 'scope' }, view.scopes.map((s) => el('label', {},
         el('input', { type: 'radio', name: 'scope', value: s.id, checked: s.id === view.scope,
           onChange: () => act.setScope(s.id) }),
-        el('span', { text: s.label }))))),
-    el('p', { class: 'muted footer', text: TEXT.footer }));
-
-  const actions = el('div', { class: 'actions' },
-    el('button', { type: 'button', class: 'primary', disabled: !hasLessons, onClick: () => act.startCards('en-ar') },
-      'English → Arabic', el('span', { class: 'sub', text: 'Counts towards remembered' })),
-    el('button', { type: 'button', disabled: !hasLessons, onClick: () => act.startCards('ar-en') }, 'Arabic → English'),
-    el('button', { type: 'button', disabled: !hasLessons, onClick: () => act.startQuiz() }, 'Quiz'));
-
-  return [content, actions];
+        el('span', { class: s.summary ? 'choice' : 'choice lone' }, s.label, s.summary && el('span', { class: 'sub', text: s.summary })))))),
+    el('div', { class: 'modes' },
+      mode('English → Arabic', null, () => act.startCards('en-ar')),
+      mode('Arabic → English', null, () => act.startCards('ar-en')),
+      mode('Quiz', 'Counts towards progress', () => act.startQuiz(), true)))];
 }
 
-function card(view, act) {
-  const { front, back } = view;
-  let face;
-  if (!view.flipped) {
-    // No aria-label here: it would replace the card's text, and screen readers
-    // would never read the prompt. The "Show answer" button below names the action.
-    face = el('button', { type: 'button', class: 'card', 'data-focus': true, onClick: () => act.flip() },
-      el('span', { class: 'big', text: front.text }),
-      front.hint && el('span', { class: 'hint', text: front.hint }));
-  } else {
-    face = el('div', { class: 'card', tabindex: '-1', 'data-focus': true },
-      el('p', { class: 'asked', text: front.hint ? `${front.text} ${front.hint}` : front.text }),
-      el('p', { class: 'big', text: back.text }));
-  }
-
-  const content = el('div', { class: 'content' },
-    topbar(view.position, view.total, act),
-    face,
-    view.flipped && back.set.length > 1 && el('ul', { class: 'set', 'aria-label': 'The whole set' },
-      back.set.map((f) => el('li', { class: f.current ? 'current' : undefined },
-        el('span', { class: 'ar', text: f.ar }), ' — ', el('span', { text: f.en })))),
-    view.flipped && back.note && el('p', { class: 'note', text: back.note }),
-    view.saveFailed && el('p', { class: 'notice', text: TEXT.saveFailed }));
-
-  const actions = el('div', { class: 'actions' },
-    view.flipped
-      ? el('div', { class: 'row' },
-        el('button', { type: 'button', class: 'wrong', onClick: () => act.mark(false) }, 'Wrong'),
-        el('button', { type: 'button', class: 'right', onClick: () => act.mark(true) }, 'Right'))
-      : el('button', { type: 'button', class: 'primary', onClick: () => act.flip() }, 'Show answer'));
-
-  return [content, actions];
-}
-
-function quiz(view, act) {
+function question(view, act) {
   const q = view.question;
   const answered = view.chosen !== null;
   const options = q.options.map((text, i) => {
@@ -119,17 +83,25 @@ function quiz(view, act) {
     else if (answered && i === view.chosen) cls = 'is-wrong';
     return el('button', { type: 'button', class: cls, disabled: answered, onClick: () => act.choose(i) }, text);
   });
+  const right = answered && view.chosen === q.answer;
   let feedback = '';
-  if (answered) feedback = view.chosen === q.answer ? 'Right' : `The answer is ${q.options[q.answer]}`;
+  if (answered) feedback = right ? (view.praise ?? 'Right!') : `The answer is ${q.options[q.answer]}`;
 
   const content = el('div', { class: 'content' },
     topbar(view.position, view.total, act),
-    el('p', { class: 'instruction', text: INSTRUCTION[q.type] }),
     el('div', { class: 'card', tabindex: '-1', 'data-focus': true },
-      el('p', { class: 'big', text: q.prompt }),
+      el('p', { class: 'ask' }, q.ask.map((part) => (part.strong ? el('strong', { text: part.text }) : part.text))),
+      q.prompt && el('p', { class: 'big', text: q.prompt }),
       q.hint && el('p', { class: 'hint', text: q.hint })),
     el('div', { class: 'options' }, options),
-    el('p', { class: 'feedback', 'aria-live': 'polite', text: feedback }));
+    el('div', { 'aria-live': 'polite' },
+      el('p', { class: right ? 'feedback praise' : 'feedback', text: feedback }),
+      answered && (view.explain ?? []).map((line) => el('p', { class: 'explain', text: line }))),
+    answered && view.set?.length > 1 && el('ul', { class: 'set', 'aria-label': 'The whole set' },
+      view.set.map((f) => el('li', { class: f.current ? 'current' : undefined },
+        el('span', { class: 'ar', text: f.ar }), ' — ', el('span', { text: f.en })))),
+    answered && view.note && el('p', { class: 'note', text: view.note }),
+    view.saveFailed && el('p', { class: 'notice', text: TEXT.saveFailed }));
 
   const actions = el('div', { class: 'actions' },
     answered && el('button', { type: 'button', class: 'primary', onClick: () => act.next() }, 'Next'));
@@ -140,11 +112,10 @@ function quiz(view, act) {
 function done(view, act) {
   const again = view.kind === 'cards' ? () => act.startCards(view.dir) : () => act.startQuiz();
   const content = el('div', { class: 'content' },
-    el('h2', { tabindex: '-1', 'data-focus': true, text: `${view.right} of ${view.total} right` }),
+    el('h2', { class: 'score', tabindex: '-1', 'data-focus': true, text: `${view.right} of ${view.total} right` }),
     view.missed.length > 0 && el('h3', { text: 'Look at these again' }),
     view.missed.length > 0 && el('ul', { class: 'missed' },
-      view.missed.map((m) => el('li', {}, el('span', { class: 'ar', text: m.ar }), ' — ', el('span', { text: m.en })))),
-    statsList(view.stats));
+      view.missed.map((m) => el('li', {}, el('span', { class: 'ar', text: m.ar }), ' — ', el('span', { text: m.en })))));
 
   const actions = el('div', { class: 'actions' },
     el('button', { type: 'button', class: 'primary', onClick: again }, 'Another round'),
@@ -153,7 +124,7 @@ function done(view, act) {
   return [content, actions];
 }
 
-const SCREENS = { home, card, quiz, done };
+const SCREENS = { home, question, done };
 
 export function render(root, view, act) {
   root.replaceChildren(...SCREENS[view.screen](view, act).filter(Boolean));

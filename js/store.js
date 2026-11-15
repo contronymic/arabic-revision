@@ -6,7 +6,7 @@ const PROBE_KEY = 'arabic-revision:probe';
 const DAY = /^\d{4}-\d{2}-\d{2}$/;
 
 export function emptyState() {
-  return { v: 1, cards: {}, rightDays: {}, prefs: { scope: 'all', installNoteDismissed: false } };
+  return { v: 1, cards: {}, rightDays: {}, quizMissed: [], prefs: { scope: 'all', installNoteDismissed: false } };
 }
 
 const isPlainObject = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -35,12 +35,18 @@ function cleanRightDays(raw) {
   return rightDays;
 }
 
+function cleanIds(raw) {
+  return Array.isArray(raw) ? [...new Set(raw.filter((id) => typeof id === 'string'))] : [];
+}
+
 // Keeps only values of the right kind; anything else falls back to the defaults.
+// Progress saved before quizMissed existed loads with none missed.
 function cleanState(raw) {
   const state = emptyState();
   if (!isPlainObject(raw) || raw.v !== 1) return state;
   state.cards = cleanCards(raw.cards);
   state.rightDays = cleanRightDays(raw.rightDays);
+  state.quizMissed = cleanIds(raw.quizMissed);
   if (isPlainObject(raw.prefs)) {
     if (typeof raw.prefs.scope === 'string') state.prefs.scope = raw.prefs.scope;
     if (typeof raw.prefs.installNoteDismissed === 'boolean') {

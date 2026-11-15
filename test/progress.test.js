@@ -1,30 +1,36 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { recordMark, isRemembered, percent, stats } from '../js/progress.js';
+import { recordMark, recordQuizAnswer, isRemembered, percent, stats } from '../js/progress.js';
 import { emptyState } from '../js/store.js';
 import { readJson } from './helpers.js';
 
 const f1 = readJson('test/fixtures/lessons/lesson-01.json');
 const f2 = readJson('test/fixtures/lessons/lesson-02.json');
-const mark = (s, phraseId, dir, right, today) => recordMark(s, { phraseId, dir, right, today });
+const quiz = (s, phraseId, right, today) => recordQuizAnswer(s, { phraseId, right, today });
 
-test('two rights on one day are one day; on two days, remembered', () => {
+test('two right quiz answers on one day are one day; on two days, remembered', () => {
   const s = emptyState();
-  mark(s, 'yes', 'en-ar', true, '2026-11-14'); mark(s, 'yes', 'en-ar', true, '2026-11-14');
+  quiz(s, 'yes', true, '2026-11-14'); quiz(s, 'yes', true, '2026-11-14');
   assert.equal(isRemembered(s, 'yes'), false);
-  mark(s, 'yes', 'en-ar', true, '2026-11-15');
+  quiz(s, 'yes', true, '2026-11-15');
   assert.equal(isRemembered(s, 'yes'), true); assert.deepEqual(s.rightDays.yes, ['2026-11-14', '2026-11-15']);
 });
 
-test('Arabic → English marks never count towards remembered', () => {
-  const s = emptyState(); mark(s, 'yes', 'ar-en', true, '2026-11-14'); mark(s, 'yes', 'ar-en', true, '2026-11-15');
-  assert.equal(isRemembered(s, 'yes'), false); assert.equal(s.cards['yes|ar-en'].box, 2);
+test('card marks move the schedule and never count towards remembered', () => {
+  const s = emptyState();
+  for (const dir of ['en-ar', 'ar-en']) {
+    recordMark(s, { phraseId: 'yes', dir, right: true, today: '2026-11-14' });
+    recordMark(s, { phraseId: 'yes', dir, right: true, today: '2026-11-15' });
+  }
+  assert.equal(isRemembered(s, 'yes'), false); assert.equal(s.cards['yes|ar-en'].box, 2); assert.equal(s.cards['yes|en-ar'].box, 2);
 });
 
-test('a wrong mark after remembering does not undo it, but resets the card', () => {
-  const s = emptyState(); mark(s, 'yes', 'en-ar', true, '2026-11-14'); mark(s, 'yes', 'en-ar', true, '2026-11-15');
-  mark(s, 'yes', 'en-ar', false, '2026-11-16');
-  assert.equal(isRemembered(s, 'yes'), true); assert.equal(s.cards['yes|en-ar'].box, 0);
+test('a wrong quiz answer after remembering does not undo it; a wrong card mark resets the card', () => {
+  const s = emptyState(); quiz(s, 'yes', true, '2026-11-14'); quiz(s, 'yes', true, '2026-11-15'); quiz(s, 'yes', false, '2026-11-16');
+  assert.equal(isRemembered(s, 'yes'), true);
+  recordMark(s, { phraseId: 'yes', dir: 'en-ar', right: true, today: '2026-11-14' });
+  recordMark(s, { phraseId: 'yes', dir: 'en-ar', right: false, today: '2026-11-16' });
+  assert.equal(s.cards['yes|en-ar'].box, 0);
 });
 
 test('percent rounds down', () => {

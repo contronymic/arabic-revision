@@ -1,16 +1,21 @@
 // The content rules every lesson must pass before it is published.
 // They run on the computer only, never on the phone, so allowing a new letter
 // for a later lesson changes this file, not the site.
+import { describeForm } from '../js/lessons.js';
 
-// The course's letters: a–z, ā ē ī ū ḥ ṭ ş ḍ ġ š, ع, space, "?", "…" and "-".
+// The course's letters: a–z, ā ē ī ū ḥ ṭ ş ḍ ġ š, ع, space, "?", "…", "-",
+// and "," for the example sentences.
 export const ALLOWED_AR =
-  /^[a-zāēīūḥṭşḍġšع ?…-]+$/u;
+  /^[a-zāēīūḥṭşḍġšع ?…,-]+$/u;
 
 const ID = /^[a-z0-9-]+$/;
 const LESSON_ID = /^lesson-\d{2}$/;
 const HINT = /^\(.+\)$/u;
 const ARABIC_SCRIPT = /[؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿]/u;
 const LINK = /http|:\/\//i;
+// English ending like a form label: "(to a …)", "(said by …)", or one word such as
+// "(plural)" or "(masc.)". A note such as "(literally: two hellos)" is not one.
+const LOOKS_LIKE_LABEL = /\((?:to a [^)]*|said by[^)]*|[^\s()]+)\)$/u;
 
 // Every string in a value, with a readable path to it.
 function* strings(value, path) {
@@ -28,6 +33,7 @@ export function validateLessons(lessons) {
     const where = typeof lesson?.id === 'string' ? lesson.id : '(a lesson)';
     if (!LESSON_ID.test(lesson?.id ?? '')) problems.push(`Lesson id "${lesson?.id}" should look like lesson-01.`);
     if (typeof lesson?.title !== 'string' || !lesson.title.trim()) problems.push(`${where}: the title is empty.`);
+    if (lesson?.summary !== undefined && (typeof lesson.summary !== 'string' || !lesson.summary.trim())) problems.push(`${where}: the summary is empty.`);
     if (!Array.isArray(lesson?.sets) || lesson.sets.length === 0) {
       problems.push(`${where}: it has no sets.`);
       continue;
@@ -55,6 +61,11 @@ export function validateLessons(lessons) {
         if (typeof form?.en !== 'string' || !form.en.trim()) problems.push(`${where}: form "${form?.id}" has no English.`);
         if (form?.hint !== undefined && !(typeof form.hint === 'string' && HINT.test(form.hint))) {
           problems.push(`${where}: the hint "${form.hint}" (${form.id}) should be in brackets.`);
+        }
+        // A form label the app can't read would be asked as plain English. The
+        // app's own reader decides, so this check and the app can't disagree.
+        if (typeof form?.en === 'string' && LOOKS_LIKE_LABEL.test(form.en) && describeForm(form.en).base === form.en) {
+          problems.push(`${where}: "${form.en}" (${form.id}) ends in a form label the app doesn't know; use (to a man), (said by a woman), (m), (f) or (pl) and the like.`);
         }
         const front = `${form?.en}\u0000${form?.hint ?? ''}`;
         if (fronts.has(front)) problems.push(`${where}: two cards would show the same English, "${form.en}"${form.hint ? ` ${form.hint}` : ''}.`);

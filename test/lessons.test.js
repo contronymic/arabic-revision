@@ -100,3 +100,42 @@ test('loadLessons does not judge letters, or links between lessons', async () =>
 test('loadLessons returns nothing and one problem when the index cannot be read', async () => {
   const r = await loadLessons(fakeFetch({})); assert.deepEqual(r.lessons, []); assert.equal(r.problems.length, 1);
 });
+
+test('forms are read from the end of the English', async () => {
+  const { describeForm, englishAnswer } = await import('../js/lessons.js');
+  assert.deepEqual(describeForm('please, offering something (to a woman)'), { base: 'please, offering something', to: 'woman' });
+  assert.deepEqual(describeForm('sorry (said by a group)'), { base: 'sorry', label: 'plural', who: 'group', by: 'group' });
+  assert.deepEqual(describeForm('busy (f)'), { base: 'busy', label: 'feminine', who: 'woman' });
+  assert.deepEqual(describeForm('reply to marḥaba (literally: two hellos)'), { base: 'reply to marḥaba (literally: two hellos)' });
+  assert.equal(englishAnswer('please, offering something (to a woman)'), 'please, offering something, to a woman');
+  assert.equal(englishAnswer('how are you? (to a man)'), 'how are you? to a man');
+  assert.equal(englishAnswer('you (m)'), 'you (masculine)');
+  assert.equal(englishAnswer('yes'), 'yes');
+});
+
+test('a form named by who says it keeps that wording', async () => {
+  const { englishAnswer } = await import('../js/lessons.js');
+  assert.equal(englishAnswer('sorry (said by a man)'), 'sorry, said by a man');
+  assert.equal(englishAnswer('no, I am not busy (said by a man)'), 'no, I am not busy, said by a man');
+});
+
+test('a form label the app cannot read is rejected', () => {
+  for (const en of ['glad (masc)', 'glad (masc.)', 'glad (plural)', 'glad (fem.)', 'hi back (to a boy)', 'sorry (said by men)']) {
+    const bad = clone(f1); bad.sets[3].forms[0].en = en;
+    assert.ok(validateLessons([bad]).some(p => p.includes(en) && p.includes('form label')), en);
+  }
+});
+
+test('a note in brackets at the end of the English is not taken for a form label', () => {
+  for (const en of ['reply to good morning (literally: morning of light)', 'reply to peace (and upon you, peace)']) {
+    const ok = clone(f1); ok.sets[3].forms[0].en = en;
+    assert.ok(!validateLessons([ok]).some(p => p.includes('form label')), en);
+  }
+});
+
+test('a lesson summary is optional, but not empty', () => {
+  const ok = clone(f1); ok.summary = 'Greetings';
+  assert.deepEqual(validateLessons([ok, f2]), []);
+  const bad = clone(f1); bad.summary = ' ';
+  assert.ok(validateLessons([bad]).some(p => p.includes('summary')));
+});

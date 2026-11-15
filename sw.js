@@ -4,7 +4,7 @@
 
 // The first 12 hex characters of the SHA-256 of SHELL_FILES (except './').
 // `node --test` gives the right value whenever a page file changes.
-const VERSION = '2b104c17a9df';
+const VERSION = '066fa5849020';
 const SHELL_PREFIX = 'arabic-revision-shell-';
 const SHELL_CACHE = SHELL_PREFIX + VERSION;
 const LESSONS_CACHE = 'arabic-revision-lessons';
@@ -27,6 +27,12 @@ const SHELL_FILES = [
   './icons/icon-180.png',
   './icons/icon-192.png',
   './icons/icon-512.png',
+  './fonts/alegreya-latin.woff2',
+  './fonts/alegreya-latin-ext.woff2',
+  './fonts/alegreya-italic-latin.woff2',
+  './fonts/alegreya-italic-latin-ext.woff2',
+  './fonts/pixelify-sans-latin.woff2',
+  './fonts/vt323-latin.woff2',
 ];
 
 const toUrl = (path) => new URL(path, self.location).href;
