@@ -1,0 +1,294 @@
+{
+  "id": "lesson-02",
+  "title": "Lesson 2",
+  "summary": "Who is it?, are you...?, daily objects, my house, your house...",
+  "sets": [
+    { "id": "aywa", "forms": [
+      {"id": "aywa", "ar": "aywa", "en": "yes", "hint": "(not naعm)"} ] },
+    { "id": "kaman", "forms": [
+      {"id": "kaman", "ar": "kamān", "en": "also / more / as well"} ] },
+    { "id": "u", "note": "Also written w, joined to the next word, as in w-inta?", "forms": [
+      {"id": "u", "ar": "u", "en": "and"} ] },
+    { "id": "min-who", "forms": [
+      {"id": "min-who", "ar": "mīn", "en": "who"} ] },
+    { "id": "w-ana-kaman", "forms": [
+      {"id": "w-ana-kaman", "ar": "w-ana kamān", "en": "and me too"} ] },
+    { "id": "mish-ana", "forms": [
+      {"id": "mish-ana", "ar": "miš ana", "en": "not me"} ] },
+    { "id": "min-inta", "reply": "ana-dots", "forms": [
+      {"id": "min-inta", "ar": "mīn inta?", "en": "who are you? (to a man)"},
+      {"id": "min-inti", "ar": "mīn inti?", "en": "who are you? (to a woman)"} ] },
+    { "id": "ana-dots", "forms": [
+      {"id": "ana-dots", "ar": "ana …", "en": "I am …"} ] },
+    { "id": "min-intu", "reply": "nihna-dots", "forms": [
+      {"id": "min-intu", "ar": "mīn intu?", "en": "who are you? (to a group)"} ] },
+    { "id": "nihna-dots", "forms": [
+      {"id": "nihna-dots", "ar": "niḥna … w…", "en": "we are … and …"} ] },
+    { "id": "min-huwwe", "reply": "huwwe-dots", "forms": [
+      {"id": "min-huwwe", "ar": "mīn huwwe?", "en": "who is he?"} ] },
+    { "id": "huwwe-dots", "forms": [
+      {"id": "huwwe-dots", "ar": "huwwe …", "en": "he is …"} ] },
+    { "id": "min-hiyye", "reply": "hiyye-dots", "forms": [
+      {"id": "min-hiyye", "ar": "mīn hiyye?", "en": "who is she?"} ] },
+    { "id": "hiyye-dots", "forms": [
+      {"id": "hiyye-dots", "ar": "hiyye …", "en": "she is …"} ] },
+    { "id": "min-humme", "reply": "humme-dots", "forms": [
+      {"id": "min-humme", "ar": "mīn humme?", "en": "who are they?"} ] },
+    { "id": "humme-dots", "forms": [
+      {"id": "humme-dots", "ar": "humme … w…", "en": "they are … and …"} ] },
+    { "id": "inta-dots", "reply": "naam-ana-dots", "forms": [
+      {"id": "inta-dots", "ar": "inta …?", "en": "are you …? (to a man)"} ] },
+    { "id": "naam-ana-dots", "forms": [
+      {"id": "naam-ana-dots", "ar": "naعm, ana …", "en": "yes, I am …"} ] },
+    { "id": "inti-dots", "reply": "la-ana-mish-dots", "forms": [
+      {"id": "inti-dots", "ar": "inti …?", "en": "are you …? (to a woman)"} ] },
+    { "id": "la-ana-mish-dots", "forms": [
+      {"id": "la-ana-mish-dots", "ar": "lā, ana miš …, ana …", "en": "no, I am not …, I am …"} ] },
+    { "id": "huwwe-q", "reply": "la-huwwe-mish", "forms": [
+      {"id": "huwwe-q", "ar": "huwwe …?", "en": "is he …?"} ] },
+    { "id": "la-huwwe-mish", "forms": [
+      {"id": "la-huwwe-mish", "ar": "lā, huwwe miš …, huwwe …", "en": "no, he is not …, he is …"} ] },
+    { "id": "ana-mabsuta-w-inta", "reply": "ana-mabsut-kaman", "forms": [
+      {"id": "ana-mabsuta-w-inta", "ar": "ana mabsūṭa lḥamdilla, w-inta?", "en": "I am fine, praise be to God, and you? (said by a woman)"} ] },
+    { "id": "ana-mabsut-kaman", "forms": [
+      {"id": "ana-mabsut-kaman", "ar": "ana mabsūṭ kamān", "en": "I am fine too (said by a man)"} ] },
+    { "id": "w-inta", "forms": [
+      {"id": "w-inta", "ar": "w-inta?", "en": "and you? (to a man)"},
+      {"id": "w-inti", "ar": "w-inti?", "en": "and you? (to a woman)"} ] },
+    { "id": "humme-mabsutin", "reply": "la-humme-mish", "forms": [
+      {"id": "humme-mabsutin", "ar": "humme mabsūṭīn?", "en": "are they fine?"} ] },
+    { "id": "la-humme-mish", "forms": [
+      {"id": "la-humme-mish", "ar": "lā, humme miš mabsūṭīn", "en": "no, they are not fine"} ] },
+    { "id": "intu-mabsutin", "reply": "naam-nihna-mabsutin", "forms": [
+      {"id": "intu-mabsutin", "ar": "intu mabsūṭīn?", "en": "are you fine? (to a group)"} ] },
+    { "id": "naam-nihna-mabsutin", "forms": [
+      {"id": "naam-nihna-mabsutin", "ar": "naعm, niḥna mabsūṭīn", "en": "yes, we are fine"} ] },
+    { "id": "nushkur-alla", "note": "A reply to kīf ḥālak?", "forms": [
+      {"id": "nushkur-alla", "ar": "nuškur alla", "en": "thanks be to God"} ] },
+    { "id": "hada", "forms": [
+      {"id": "hada", "ar": "hada", "en": "this (m)"} ] },
+    { "id": "shu-yani", "forms": [
+      {"id": "shu-yani", "ar": "šū yaعni … bil-عrabi?", "en": "what does … mean in Arabic?"} ] },
+    { "id": "bet", "forms": [
+      {"id": "bet", "ar": "bēt", "en": "house"} ] },
+    { "id": "beti", "forms": [
+      {"id": "beti", "ar": "bēti", "en": "my house"},
+      {"id": "betak", "ar": "bētak", "en": "your house (to a man)"},
+      {"id": "betek", "ar": "bētek", "en": "your house (to a woman)"},
+      {"id": "beto", "ar": "bēto", "en": "his house"},
+      {"id": "betha", "ar": "bētha", "en": "her house"},
+      {"id": "betna", "ar": "bētna", "en": "our house"},
+      {"id": "betkum", "ar": "bētkum", "en": "your house (to a group)"},
+      {"id": "bethum", "ar": "bēthum", "en": "their house"} ] },
+    { "id": "ustaz", "note": "Also means Mr, before a name.", "forms": [
+      {"id": "ustaz", "ar": "ustāz", "en": "teacher"} ] },
+    { "id": "ustazi", "forms": [
+      {"id": "ustazi", "ar": "ustāzi", "en": "my teacher"},
+      {"id": "ustazak", "ar": "ustāzak", "en": "your teacher (to a man)"},
+      {"id": "ustazek", "ar": "ustāzek", "en": "your teacher (to a woman)"},
+      {"id": "ustazo", "ar": "ustāzo", "en": "his teacher"},
+      {"id": "ustazha", "ar": "ustāzha", "en": "her teacher"},
+      {"id": "ustazna", "ar": "ustāzna", "en": "our teacher"},
+      {"id": "ustazkum", "ar": "ustāzkum", "en": "your teacher (to a group)"},
+      {"id": "ustazhum", "ar": "ustāzhum", "en": "their teacher"} ] },
+    { "id": "ktab", "forms": [
+      {"id": "ktab", "ar": "ktāb", "en": "book"} ] },
+    { "id": "ktabi", "forms": [
+      {"id": "ktabi", "ar": "ktābi", "en": "my book"},
+      {"id": "ktabak", "ar": "ktābak", "en": "your book (to a man)"},
+      {"id": "ktabek", "ar": "ktābek", "en": "your book (to a woman)"},
+      {"id": "ktabo", "ar": "ktābo", "en": "his book"},
+      {"id": "ktabha", "ar": "ktābha", "en": "her book"},
+      {"id": "ktabna", "ar": "ktābna", "en": "our book"},
+      {"id": "ktabkum", "ar": "ktābkum", "en": "your book (to a group)"},
+      {"id": "ktabhum", "ar": "ktābhum", "en": "their book"} ] },
+    { "id": "maktab", "forms": [
+      {"id": "maktab", "ar": "maktab", "en": "office"} ] },
+    { "id": "maktabi", "forms": [
+      {"id": "maktabi", "ar": "maktabi", "en": "my office"},
+      {"id": "maktabak", "ar": "maktabak", "en": "your office (to a man)"},
+      {"id": "maktabek", "ar": "maktabek", "en": "your office (to a woman)"},
+      {"id": "maktabo", "ar": "maktabo", "en": "his office"},
+      {"id": "maktabha", "ar": "maktabha", "en": "her office"},
+      {"id": "maktabna", "ar": "maktabna", "en": "our office"},
+      {"id": "maktabkum", "ar": "maktabkum", "en": "your office (to a group)"},
+      {"id": "maktabhum", "ar": "maktabhum", "en": "their office"} ] },
+    { "id": "jar", "forms": [
+      {"id": "jar", "ar": "jār", "en": "neighbour"} ] },
+    { "id": "jari", "forms": [
+      {"id": "jari", "ar": "jāri", "en": "my neighbour"},
+      {"id": "jarak", "ar": "jārak", "en": "your neighbour (to a man)"},
+      {"id": "jarek", "ar": "jārek", "en": "your neighbour (to a woman)"},
+      {"id": "jaro", "ar": "jāro", "en": "his neighbour"},
+      {"id": "jarha", "ar": "jārha", "en": "her neighbour"},
+      {"id": "jarna", "ar": "jārna", "en": "our neighbour"},
+      {"id": "jarkum", "ar": "jārkum", "en": "your neighbour (to a group)"},
+      {"id": "jarhum", "ar": "jārhum", "en": "their neighbour"} ] },
+    { "id": "kas", "forms": [
+      {"id": "kas", "ar": "kās", "en": "glass"} ] },
+    { "id": "kasi", "forms": [
+      {"id": "kasi", "ar": "kāsi", "en": "my glass"},
+      {"id": "kasak", "ar": "kāsak", "en": "your glass (to a man)"},
+      {"id": "kasek", "ar": "kāsek", "en": "your glass (to a woman)"},
+      {"id": "kaso", "ar": "kāso", "en": "his glass"},
+      {"id": "kasha", "ar": "kāsha", "en": "her glass"},
+      {"id": "kasna", "ar": "kāsna", "en": "our glass"},
+      {"id": "kaskum", "ar": "kāskum", "en": "your glass (to a group)"},
+      {"id": "kashum", "ar": "kāshum", "en": "their glass"} ] },
+    { "id": "muftah", "forms": [
+      {"id": "muftah", "ar": "muftāḥ", "en": "key"} ] },
+    { "id": "muftahi", "forms": [
+      {"id": "muftahi", "ar": "muftāḥi", "en": "my key"},
+      {"id": "muftahak", "ar": "muftāḥak", "en": "your key (to a man)"},
+      {"id": "muftahek", "ar": "muftāḥek", "en": "your key (to a woman)"},
+      {"id": "muftaho", "ar": "muftāḥo", "en": "his key"},
+      {"id": "muftahha", "ar": "muftāḥha", "en": "her key"},
+      {"id": "muftahna", "ar": "muftāḥna", "en": "our key"},
+      {"id": "muftahkum", "ar": "muftāḥkum", "en": "your key (to a group)"},
+      {"id": "muftahhum", "ar": "muftāḥhum", "en": "their key"} ] },
+    { "id": "bidd", "forms": [
+      {"id": "bidd", "ar": "bidd", "en": "want"} ] },
+    { "id": "biddi", "forms": [
+      {"id": "biddi", "ar": "biddi", "en": "I want"},
+      {"id": "biddak", "ar": "biddak", "en": "you want (to a man)"},
+      {"id": "biddek", "ar": "biddek", "en": "you want (to a woman)"},
+      {"id": "biddo", "ar": "biddo", "en": "he wants"},
+      {"id": "biddha", "ar": "biddha", "en": "she wants"},
+      {"id": "biddna", "ar": "biddna", "en": "we want"},
+      {"id": "biddkum", "ar": "biddkum", "en": "you want (to a group)"},
+      {"id": "biddhum", "ar": "biddhum", "en": "they want"} ] },
+    { "id": "aind", "forms": [
+      {"id": "aind", "ar": "عind", "en": "have, at, by"} ] },
+    { "id": "aindi", "forms": [
+      {"id": "aindi", "ar": "عindi", "en": "I have"},
+      {"id": "aindak", "ar": "عindak", "en": "you have (to a man)"},
+      {"id": "aindek", "ar": "عindek", "en": "you have (to a woman)"},
+      {"id": "aindo", "ar": "عindo", "en": "he has"},
+      {"id": "aindha", "ar": "عindha", "en": "she has"},
+      {"id": "aindna", "ar": "عindna", "en": "we have"},
+      {"id": "aindkum", "ar": "عindkum", "en": "you have (to a group)"},
+      {"id": "aindhum", "ar": "عindhum", "en": "they have"} ] },
+    { "id": "def", "forms": [
+      {"id": "def", "ar": "ḍēf", "en": "guest"} ] },
+    { "id": "defi", "forms": [
+      {"id": "defi", "ar": "ḍēfi", "en": "my guest"},
+      {"id": "defak", "ar": "ḍēfak", "en": "your guest (to a man)"},
+      {"id": "defek", "ar": "ḍēfek", "en": "your guest (to a woman)"},
+      {"id": "defo", "ar": "ḍēfo", "en": "his guest"},
+      {"id": "defha", "ar": "ḍēfha", "en": "her guest"},
+      {"id": "defna", "ar": "ḍēfna", "en": "our guest"},
+      {"id": "defkum", "ar": "ḍēfkum", "en": "your guest (to a group)"},
+      {"id": "defhum", "ar": "ḍēfhum", "en": "their guest"} ] },
+    { "id": "sadiq", "forms": [
+      {"id": "sadiq", "ar": "şadīq", "en": "friend", "hint": "(not şāḥib)"} ] },
+    { "id": "sadiqi", "forms": [
+      {"id": "sadiqi", "ar": "şadīqi", "en": "my friend", "hint": "(not şāḥbi)"},
+      {"id": "sadiqak", "ar": "şadīqak", "en": "your friend (to a man)", "hint": "(not şāḥbak)"},
+      {"id": "sadiqek", "ar": "şadīqek", "en": "your friend (to a woman)", "hint": "(not şāḥbek)"},
+      {"id": "sadiqo", "ar": "şadīqo", "en": "his friend", "hint": "(not şāḥbo)"},
+      {"id": "sadiqha", "ar": "şadīqha", "en": "her friend", "hint": "(not şāḥibha)"},
+      {"id": "sadiqna", "ar": "şadīqna", "en": "our friend", "hint": "(not şāḥibna)"},
+      {"id": "sadiqkum", "ar": "şadīqkum", "en": "your friend (to a group)", "hint": "(not şāḥibkum)"},
+      {"id": "sadiqhum", "ar": "şadīqhum", "en": "their friend", "hint": "(not şāḥibhum)"} ] },
+    { "id": "qamis", "forms": [
+      {"id": "qamis", "ar": "qamīş", "en": "shirt"} ] },
+    { "id": "qamisi", "forms": [
+      {"id": "qamisi", "ar": "qamīşi", "en": "my shirt"},
+      {"id": "qamisak", "ar": "qamīşak", "en": "your shirt (to a man)"},
+      {"id": "qamisek", "ar": "qamīşek", "en": "your shirt (to a woman)"},
+      {"id": "qamiso", "ar": "qamīşo", "en": "his shirt"},
+      {"id": "qamisha", "ar": "qamīşha", "en": "her shirt"},
+      {"id": "qamisna", "ar": "qamīşna", "en": "our shirt"},
+      {"id": "qamiskum", "ar": "qamīşkum", "en": "your shirt (to a group)"},
+      {"id": "qamishum", "ar": "qamīşhum", "en": "their shirt"} ] },
+    { "id": "bantalon", "forms": [
+      {"id": "bantalon", "ar": "banṭalōn", "en": "trousers"} ] },
+    { "id": "bantaloni", "forms": [
+      {"id": "bantaloni", "ar": "banṭalōni", "en": "my trousers"},
+      {"id": "bantalonak", "ar": "banṭalōnak", "en": "your trousers (to a man)"},
+      {"id": "bantalonek", "ar": "banṭalōnek", "en": "your trousers (to a woman)"},
+      {"id": "bantalono", "ar": "banṭalōno", "en": "his trousers"},
+      {"id": "bantalonha", "ar": "banṭalōnha", "en": "her trousers"},
+      {"id": "bantalonna", "ar": "banṭalōnna", "en": "our trousers"},
+      {"id": "bantalonkum", "ar": "banṭalōnkum", "en": "your trousers (to a group)"},
+      {"id": "bantalonhum", "ar": "banṭalōnhum", "en": "their trousers"} ] },
+    { "id": "ismo", "forms": [
+      {"id": "ismo", "ar": "ismo", "en": "his name"},
+      {"id": "isimha", "ar": "isimha", "en": "her name"},
+      {"id": "isimna", "ar": "isimna", "en": "our name"},
+      {"id": "isimkum", "ar": "isimkum", "en": "your name (to a group)"},
+      {"id": "isimhum", "ar": "isimhum", "en": "their name"} ] },
+    { "id": "sahib", "forms": [
+      {"id": "sahib", "ar": "şāḥib", "en": "friend", "hint": "(not şadīq)"} ] },
+    { "id": "sahbi", "forms": [
+      {"id": "sahbi", "ar": "şāḥbi", "en": "my friend", "hint": "(not şadīqi)"},
+      {"id": "sahbak", "ar": "şāḥbak", "en": "your friend (to a man)", "hint": "(not şadīqak)"},
+      {"id": "sahbek", "ar": "şāḥbek", "en": "your friend (to a woman)", "hint": "(not şadīqek)"},
+      {"id": "sahbo", "ar": "şāḥbo", "en": "his friend", "hint": "(not şadīqo)"},
+      {"id": "sahibha", "ar": "şāḥibha", "en": "her friend", "hint": "(not şadīqha)"},
+      {"id": "sahibna", "ar": "şāḥibna", "en": "our friend", "hint": "(not şadīqna)"},
+      {"id": "sahibkum", "ar": "şāḥibkum", "en": "your friend (to a group)", "hint": "(not şadīqkum)"},
+      {"id": "sahibhum", "ar": "şāḥibhum", "en": "their friend", "hint": "(not şadīqhum)"} ] },
+    { "id": "shughul", "forms": [
+      {"id": "shughul", "ar": "šuġul", "en": "work"} ] },
+    { "id": "shughli", "forms": [
+      {"id": "shughli", "ar": "šuġli", "en": "my work"},
+      {"id": "shughlak", "ar": "šuġlak", "en": "your work (to a man)"},
+      {"id": "shughlek", "ar": "šuġlek", "en": "your work (to a woman)"},
+      {"id": "shughlo", "ar": "šuġlo", "en": "his work"},
+      {"id": "shughulha", "ar": "šuġulha", "en": "her work"},
+      {"id": "shughulna", "ar": "šuġulna", "en": "our work"},
+      {"id": "shughulkum", "ar": "šuġulkum", "en": "your work (to a group)"},
+      {"id": "shughulhum", "ar": "šuġulhum", "en": "their work"} ] },
+    { "id": "ibin", "forms": [
+      {"id": "ibin", "ar": "ibin", "en": "son"} ] },
+    { "id": "ibni", "forms": [
+      {"id": "ibni", "ar": "ibni", "en": "my son"},
+      {"id": "ibnak", "ar": "ibnak", "en": "your son (to a man)"},
+      {"id": "ibnek", "ar": "ibnek", "en": "your son (to a woman)"},
+      {"id": "ibno", "ar": "ibno", "en": "his son"},
+      {"id": "ibinha", "ar": "ibinha", "en": "her son"},
+      {"id": "ibinna", "ar": "ibinna", "en": "our son"},
+      {"id": "ibinkum", "ar": "ibinkum", "en": "your son (to a group)"},
+      {"id": "ibinhum", "ar": "ibinhum", "en": "their son"} ] },
+    { "id": "il-bet", "forms": [
+      {"id": "il-bet", "ar": "il-bēt", "en": "the house"} ] },
+    { "id": "il-bet-betak", "forms": [
+      {"id": "il-bet-betak", "ar": "il-bēt bētak", "en": "the house is yours, feel at home (to a man)"},
+      {"id": "il-bet-betek", "ar": "il-bēt bētek", "en": "the house is yours, feel at home (to a woman)"},
+      {"id": "il-bet-betkum", "ar": "il-bēt bētkum", "en": "the house is yours, feel at home (to a group)"} ] },
+    { "id": "qamar", "forms": [
+      {"id": "qamar", "ar": "qamar", "en": "moon"} ] },
+    { "id": "il-qamar", "forms": [
+      {"id": "il-qamar", "ar": "il-qamar", "en": "the moon"} ] },
+    { "id": "shams", "forms": [
+      {"id": "shams", "ar": "šams", "en": "sun"} ] },
+    { "id": "i-sshams", "forms": [
+      {"id": "i-sshams", "ar": "i-ššams", "en": "the sun"} ] },
+    { "id": "il-ktab", "forms": [
+      {"id": "il-ktab", "ar": "il-ktāb", "en": "the book"} ] },
+    { "id": "walad", "forms": [
+      {"id": "walad", "ar": "walad", "en": "boy"} ] },
+    { "id": "il-walad", "forms": [
+      {"id": "il-walad", "ar": "il-walad", "en": "the boy"} ] },
+    { "id": "i-ddef", "forms": [
+      {"id": "i-ddef", "ar": "i-ḍḍēf", "en": "the guest"} ] },
+    { "id": "i-sshughul", "forms": [
+      {"id": "i-sshughul", "ar": "i-ššuġul", "en": "the work"} ] },
+    { "id": "fi-l-bet", "forms": [
+      {"id": "fi-l-bet", "ar": "fi l-bēt", "en": "at home"} ] },
+    { "id": "ana-fi", "forms": [
+      {"id": "ana-fi", "ar": "ana fi …", "en": "I am in …"} ] },
+    { "id": "ana-ma-aindi", "forms": [
+      {"id": "ana-ma-aindi", "ar": "ana ma عindi", "en": "I don't have"} ] },
+    { "id": "kif-binaqul", "forms": [
+      {"id": "kif-binaqul", "ar": "kīf binaqūl … bil-عrabi?", "en": "how do we say … in Arabic?"} ] },
+    { "id": "fahim", "forms": [
+      {"id": "fahim", "ar": "fahim", "en": "understand (m)"},
+      {"id": "fahme", "ar": "fahme", "en": "understand (f)"},
+      {"id": "fahmin", "ar": "fahmīn", "en": "understand (pl)"} ] },
+    { "id": "ana-mish-fahim", "forms": [
+      {"id": "ana-mish-fahim", "ar": "ana miš fahim", "en": "I don't understand (said by a man)"},
+      {"id": "ana-mish-fahme", "ar": "ana miš fahme", "en": "I don't understand (said by a woman)"} ] }
+  ]
+}

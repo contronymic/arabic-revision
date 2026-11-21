@@ -1,1 +1,1 @@
-{ "lessons": [ { "id": "lesson-01", "file": "lesson-01.json" } ] }
+{ "lessons": [ { "id": "lesson-01", "file": "lesson-01.json" }, { "id": "lesson-02", "file": "lesson-02.json" } ] }

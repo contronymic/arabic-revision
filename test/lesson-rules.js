@@ -3,10 +3,10 @@
 // for a later lesson changes this file, not the site.
 import { describeForm } from '../js/lessons.js';
 
-// The course's letters: a–z, ā ē ī ū ḥ ṭ ş ḍ ġ š, ع, space, "?", "…", "-",
+// The course's letters: a–z, ā ē ī ō ū ḥ ṭ ş ḍ ġ š, ع, space, "?", "…", "-",
 // and "," for the example sentences.
 export const ALLOWED_AR =
-  /^[a-zāēīūḥṭşḍġšع ?…,-]+$/u;
+  /^[a-zāēīōūḥṭşḍġšع ?…,-]+$/u;
 
 const ID = /^[a-z0-9-]+$/;
 const LESSON_ID = /^lesson-\d{2}$/;

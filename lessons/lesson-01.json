@@ -6,7 +6,7 @@
     { "id": "ahlan", "reply": "ahlan-bika", "forms": [
       {"id": "ahlan", "ar": "ahlan", "en": "hello", "hint": "(not marḥaba)"} ] },
     { "id": "naam", "forms": [
-      {"id": "naam", "ar": "naعm", "en": "yes"} ] },
+      {"id": "naam", "ar": "naعm", "en": "yes", "hint": "(not aywa)"} ] },
     { "id": "la", "forms": [
       {"id": "la", "ar": "lā", "en": "no"} ] },
     { "id": "tafaddal", "forms": [
@@ -39,9 +39,9 @@
     { "id": "sabah-i-nnur", "forms": [
       {"id": "sabah-i-nnur", "ar": "şabāḥ i-nnūr", "en": "reply to good morning (literally: morning of light)"} ] },
     { "id": "masa-il-kher", "reply": "masa-i-nnur", "forms": [
-      {"id": "masa-il-kher", "ar": "masa il-kḥēr", "en": "good evening"} ] },
+      {"id": "masa-il-kher", "ar": "masa l-kḥēr", "en": "good evening"} ] },
     { "id": "masa-i-nnur", "forms": [
-      {"id": "masa-i-nnur", "ar": "masa i-nnūr", "en": "reply to good evening (literally: evening of light)"} ] },
+      {"id": "masa-i-nnur", "ar": "masa nnūr", "en": "reply to good evening (literally: evening of light)"} ] },
     { "id": "tisbah", "reply": "min-ahlu", "note": "Literally: may you wake up well.", "forms": [
       {"id": "tisbah", "ar": "tisbaḥ عalā kḥēr", "en": "good night (to a man)"},
       {"id": "tisbahi", "ar": "tisbaḥi عalā kḥēr", "en": "good night (to a woman)"},

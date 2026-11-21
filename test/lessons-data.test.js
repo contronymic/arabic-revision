@@ -11,3 +11,4 @@ const lessons = index.lessons.map(l => readJson('lessons/' + l.file));
 test('every published lesson passes every check', () => assert.deepEqual(validateLessons(lessons), []));
 test('the index ids match the files', () => assert.deepEqual(lessons.map(l => l.id), index.lessons.map(l => l.id)));
 test('lesson 1 has its 76 checked phrases', () => assert.equal(flatten([lessons[0]]).phrases.length, 76));
+test('lesson 2 has its 205 checked phrases', () => assert.equal(flatten([lessons[1]]).phrases.length, 205));
