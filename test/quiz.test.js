@@ -151,3 +151,38 @@ test('a reply never offers another reply ending in the same word as wrong', () =
     assert.ok(!q.options.includes('hamdu zayna'), q.options.join(' / '));
   }
 });
+
+test('a reply never offers, as wrong, the reply to the same question asked of someone else', () => {
+  const lesson = { id: 'lesson-01', title: 'x', sets: [
+    { id: 'who', reply: 'i-am', forms: [ { id: 'who', ar: 'mazu inta?', en: 'who are you? (to a man)' } ] },
+    { id: 'i-am', forms: [ { id: 'i-am', ar: 'ana …', en: 'I am …' } ] },
+    { id: 'who-pl', reply: 'we-are', forms: [ { id: 'who-pl', ar: 'mazu intu?', en: 'who are you? (to a group)' } ] },
+    { id: 'we-are', forms: [ { id: 'we-are', ar: 'niḥna … w…', en: 'we are … and …' } ] },
+    { id: 'yes', forms: [ { id: 'yes', ar: 'ayzu', en: 'yes' } ] },
+    { id: 'no', forms: [ { id: 'no', ar: 'lā', en: 'no' } ] },
+    { id: 'thanks', forms: [ { id: 'thanks', ar: 'šukzi', en: 'thank you' } ] } ] };
+  const { phrases: ps, sets: ss } = flatten([lesson]);
+  for (let seed = 1; seed <= 30; seed++) {
+    const q = makeQuestion('en-ar', ps.find((p) => p.id === 'we-are'), ps, ss, seededRng(seed));
+    assert.equal(q.type, 'reply'); assert.equal(q.prompt, 'mazu intu?');
+    assert.ok(!q.options.includes('ana …'), q.options.join(' / '));
+  }
+});
+
+test('a reply with a gap never offers, as wrong, a reply that fills the gap', () => {
+  const lesson = { id: 'lesson-01', title: 'x', sets: [
+    { id: 'q-f', reply: 'no-i-am', forms: [ { id: 'q-f', ar: 'inti …?', en: 'are you …? (to a woman)' } ] },
+    { id: 'no-i-am', forms: [ { id: 'no-i-am', ar: 'lā, ana miš …, ana …', en: 'no, I am not …, I am …' } ] },
+    { id: 'q-m', reply: 'yes-i-am', forms: [ { id: 'q-m', ar: 'inta …?', en: 'are you …? (to a man)' } ] },
+    { id: 'yes-i-am', forms: [ { id: 'yes-i-am', ar: 'ayzu, ana …', en: 'yes, I am …' } ] },
+    { id: 'q-fine', reply: 'yes-fine', forms: [ { id: 'q-fine', ar: 'inti zayna?', en: 'are you fine? (to a woman)' } ] },
+    { id: 'yes-fine', forms: [ { id: 'yes-fine', ar: 'ayzu, ana zayna', en: 'yes, I am fine (said by a woman)' } ] },
+    { id: 'thanks', forms: [ { id: 'thanks', ar: 'šukzi', en: 'thank you' } ] },
+    { id: 'hello', forms: [ { id: 'hello', ar: 'zubu', en: 'hello' } ] } ] };
+  const { phrases: ps, sets: ss } = flatten([lesson]);
+  for (let seed = 1; seed <= 30; seed++) {
+    const q = makeQuestion('en-ar', ps.find((p) => p.id === 'no-i-am'), ps, ss, seededRng(seed));
+    assert.equal(q.type, 'reply'); assert.equal(q.prompt, 'inti …?');
+    assert.ok(!q.options.includes('ayzu, ana zayna'), q.options.join(' / '));
+  }
+});

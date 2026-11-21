@@ -62,15 +62,23 @@ function reply(phrase, pool, sets, rng) {
 
   // A greeting with the same English (ahlan and marḥaba both mean "hello") is the
   // same greeting said another way, so its replies are right too: never offer them,
-  // or those greetings, as wrong choices.
-  const sameEnglish = new Set(pool.filter((p) => p.en === greeting.en).map((p) => p.setId));
+  // or those greetings, as wrong choices. So is the same question asked of someone
+  // else: "mīn intu?" is "mīn inta?" asked to a group.
+  const base = describeForm(greeting.en).base;
+  const sameEnglish = new Set(pool.filter((p) => p.en === greeting.en || describeForm(p.en).base === base)
+    .map((p) => p.setId));
   sameEnglish.add(greeting.setId);
   const rightReplies = new Set([...sameEnglish].map((id) => sets.get(id)?.reply).filter(Boolean));
   // Another reply ending in the same word ("naعm, ana mabsūṭa" beside
   // "ilḥamdilla mabsūṭa") may be just as right, so it is never offered as wrong.
   const lastWord = (ar) => ar.replace(/[?…]+$/u, '').trim().split(' ').pop();
+  // A right reply with a gap ("naعm, ana …") is right with any word in the gap,
+  // so a reply that fills it ("naعm, ana mabsūṭa") is never offered as wrong either.
+  const escape = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const gaps = pool.filter((p) => rightReplies.has(p.setId) && p.ar.includes('…'))
+    .map((p) => new RegExp('^' + p.ar.split('…').map(escape).join('.+') + '$', 'u'));
   const usable = pool.filter((p) => !rightReplies.has(p.setId) && !sameEnglish.has(p.setId)
-    && p.setId !== phrase.setId && lastWord(p.ar) !== lastWord(phrase.ar));
+    && p.setId !== phrase.setId && lastWord(p.ar) !== lastWord(phrase.ar) && !gaps.some((g) => g.test(p.ar)));
   const replyTargets = new Set([...sets.values()].map((s) => s.reply).filter(Boolean));
   // The reply's other forms are wrong only because of who is spoken to, or who speaks.
   const first = to || matched.length > 0 ? siblingsOf(phrase, pool).map((p) => p.ar) : [];
