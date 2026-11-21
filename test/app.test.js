@@ -219,3 +219,10 @@ test('a right answer gets a word of praise, kept until Next', () => {
   app.next(); const q2 = app.view().question; app.choose((q2.answer + 1) % q2.options.length);
   assert.equal(app.view().praise, undefined);
 });
+
+test("the praise mixes the course's own aywa! and tamam! with English, in letters the praise font has", () => {
+  assert.ok(PRAISE.includes('aywa!') && PRAISE.includes('tamam!'), PRAISE.join(' / '));
+  assert.ok(PRAISE.some((p) => /[A-Z]/.test(p)), 'no English left');
+  // The praise is set in the pixel font, which carries plain Latin letters only.
+  for (const p of PRAISE) assert.match(p, /^[A-Za-z !]+$/);
+});

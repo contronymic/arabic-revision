@@ -11,7 +11,8 @@ export const SCOPE_ALL = 'all';
 const ROUND_SIZE = 10;
 
 // Said for a right answer, one picked at random each time.
-export const PRAISE = ['Right!', 'Correct!', 'Yes!', 'Well done!', 'Spot on!', 'Exactly!', 'Nice one!'];
+// The course's own aywa ("yes") and tamam ("alright"), mixed with English.
+export const PRAISE = ['aywa!', 'tamam!', 'Well done!', 'Spot on!', 'Nice one!'];
 
 // navigator.standalone exists only in Safari on iPhone and iPad.
 export function shouldShowInstallNote(standalone, dismissed) {
