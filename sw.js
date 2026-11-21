@@ -4,7 +4,7 @@
 
 // The first 12 hex characters of the SHA-256 of SHELL_FILES (except './').
 // `node --test` gives the right value whenever a page file changes.
-const VERSION = '8a113660ed84';
+const VERSION = 'bc8fa6b740c9';
 const SHELL_PREFIX = 'arabic-revision-shell-';
 const SHELL_CACHE = SHELL_PREFIX + VERSION;
 const LESSONS_CACHE = 'arabic-revision-lessons';

@@ -98,6 +98,11 @@ export function createApp({ lessons, problems = [], store, now = () => new Date(
     return view;
   }
 
+  // Progress has its own page, so the home screen stays short as lessons are added.
+  function progressView() {
+    return { screen: 'progress', stats: stats(state, content.lessons), saveFailed };
+  }
+
   function doneView() {
     const right = round.results.filter((r) => r.right).length;
     const missed = round.results.filter((r) => !r.right).map((r) => ({ ar: r.phrase.ar, en: englishAnswer(r.phrase.en) }));
@@ -109,6 +114,7 @@ export function createApp({ lessons, problems = [], store, now = () => new Date(
     view() {
       if (screen === 'question') return questionView();
       if (screen === 'done') return doneView();
+      if (screen === 'progress') return progressView();
       return homeView();
     },
 
@@ -166,6 +172,12 @@ export function createApp({ lessons, problems = [], store, now = () => new Date(
 
     goHome() {
       screen = 'home';
+      round = null;
+    },
+
+    showProgress() {
+      refresh();
+      screen = 'progress';
       round = null;
     },
 

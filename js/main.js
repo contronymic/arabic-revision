@@ -26,13 +26,13 @@ function draw() {
   }
 }
 
-const METHODS = ['setScope', 'startCards', 'startQuiz', 'choose', 'next', 'goHome', 'dismissInstallNote'];
+const METHODS = ['setScope', 'startCards', 'startQuiz', 'choose', 'next', 'goHome', 'showProgress', 'dismissInstallNote'];
 const act = Object.fromEntries(METHODS.map((name) => [name, (...args) => { app[name](...args); draw(); }]));
 
-// Redraws the home screen, which shows progress, after progress was re-read.
+// Redraws the home screen or the progress page after progress was re-read.
 function refreshProgress() {
   app.refresh();
-  if (app.view().screen === 'home') draw();
+  if (['home', 'progress'].includes(app.view().screen)) draw();
 }
 
 draw();

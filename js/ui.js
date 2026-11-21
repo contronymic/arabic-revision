@@ -58,9 +58,7 @@ function home(view, act) {
       el('p', { text: TEXT.installNote }),
       el('button', { type: 'button', onClick: () => act.dismissInstallNote() }, 'OK')),
     view.saveFailed && el('p', { class: 'notice', text: TEXT.saveFailed }),
-    el('h2', { text: 'Progress:' }),
-    hasLessons ? statsLines(view.stats) : el('p', { text: TEXT.noLessons }),
-    hasLessons && el('p', { class: 'muted progress-note', text: TEXT.progressNote }),
+    !hasLessons && el('p', { text: TEXT.noLessons }),
     hasLessons && view.problems.length > 0 && el('p', { class: 'notice', text: TEXT.someMissing }),
     hasLessons && el('fieldset', {},
       el('legend', {}, el('h2', { text: 'What do you want to work on?' })),
@@ -71,7 +69,23 @@ function home(view, act) {
     el('div', { class: 'modes' },
       mode('English → Arabic', null, () => act.startCards('en-ar')),
       mode('Arabic → English', null, () => act.startCards('ar-en')),
-      mode('Quiz', 'Counts towards progress', () => act.startQuiz(), true)))];
+      mode('Quiz', 'Counts towards progress', () => act.startQuiz(), true),
+      hasLessons && el('button', { type: 'button', onClick: () => act.showProgress() }, 'Progress')))];
+}
+
+// Progress on its own page: each lesson's figures, the overall line and what "remembered" means.
+function progress(view, act) {
+  const hasLessons = view.stats.lessons.length > 0;
+  const content = el('div', { class: 'content' },
+    el('h2', { tabindex: '-1', 'data-focus': true, text: 'Progress' }),
+    hasLessons ? statsLines(view.stats) : el('p', { text: TEXT.noLessons }),
+    hasLessons && el('p', { class: 'muted progress-note', text: TEXT.progressNote }),
+    view.saveFailed && el('p', { class: 'notice', text: TEXT.saveFailed }));
+
+  const actions = el('div', { class: 'actions' },
+    el('button', { type: 'button', class: 'primary', onClick: () => act.goHome() }, 'Home'));
+
+  return [content, actions];
 }
 
 function question(view, act) {
@@ -124,7 +138,7 @@ function done(view, act) {
   return [content, actions];
 }
 
-const SCREENS = { home, question, done };
+const SCREENS = { home, question, done, progress };
 
 export function render(root, view, act) {
   root.replaceChildren(...SCREENS[view.screen](view, act).filter(Boolean));

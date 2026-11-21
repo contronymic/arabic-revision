@@ -123,7 +123,14 @@ test('a round ends with a summary of what was missed', () => {
   const app = makeApp(); app.setScope('lesson-02'); app.startCards('en-ar');
   answer(app, false); answer(app, true); answer(app, true);
   const v = app.view(); assert.equal(v.screen, 'done'); assert.equal(v.right, 2); assert.equal(v.total, 3); assert.equal(v.missed.length, 1);
-  assert.equal(v.stats, undefined);   // progress shows on the home screen only
+  assert.equal(v.stats, undefined);   // progress has its own page, not the end of a round
+});
+
+test('progress has its own page, with every lesson and the overall figures, and Home goes back', () => {
+  const app = makeApp(); app.showProgress();
+  const v = app.view(); assert.equal(v.screen, 'progress');
+  assert.equal(v.stats.lessons.length, 2); assert.equal(v.stats.overall.total, 13);
+  app.goHome(); assert.equal(app.view().screen, 'home');
 });
 
 test('after answering, the whole set and its note are shown, labelled by form', () => {
